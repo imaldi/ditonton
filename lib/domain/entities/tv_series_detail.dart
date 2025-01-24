@@ -1,72 +1,72 @@
 import 'package:equatable/equatable.dart';
 
 class TvSeriesDetail extends Equatable {
-  bool? adult;
-  String? backdropPath;
-  List<CreatedBy>? createdBy;
-  List<dynamic>? episodeRunTime;
-  DateTime? firstAirDate;
-  List<Genre>? genres;
-  String? homepage;
-  int? id;
-  bool? inProduction;
-  List<String>? languages;
-  DateTime? lastAirDate;
+  bool adult;
+  String backdropPath;
+  List<CreatedBy> createdBy;
+  List<dynamic> episodeRunTime;
+  DateTime firstAirDate;
+  List<Genre> genres;
+  String homepage;
+  int id;
+  bool inProduction;
+  List<String> languages;
+  DateTime lastAirDate;
   TEpisodeToAir? lastEpisodeToAir;
-  String? name;
+  String name;
   TEpisodeToAir? nextEpisodeToAir;
-  List<Network>? networks;
-  int? numberOfEpisodes;
-  int? numberOfSeasons;
-  List<String>? originCountry;
-  String? originalLanguage;
-  String? originalName;
-  String? overview;
-  double? popularity;
-  String? posterPath;
-  List<Network>? productionCompanies;
-  List<ProductionCountry>? productionCountries;
-  List<Season>? seasons;
-  List<SpokenLanguage>? spokenLanguages;
-  String? status;
-  String? tagline;
-  String? type;
-  double? voteAverage;
-  int? voteCount;
+  List<Network> networks;
+  int numberOfEpisodes;
+  int numberOfSeasons;
+  List<String> originCountry;
+  String originalLanguage;
+  String originalName;
+  String overview;
+  double popularity;
+  String posterPath;
+  List<Network> productionCompanies;
+  List<ProductionCountry> productionCountries;
+  List<Season> seasons;
+  List<SpokenLanguage> spokenLanguages;
+  String status;
+  String tagline;
+  String type;
+  double voteAverage;
+  int voteCount;
 
   TvSeriesDetail({
-    this.adult,
-    this.backdropPath,
-    this.createdBy,
-    this.episodeRunTime,
-    this.firstAirDate,
-    this.genres,
-    this.homepage,
-    this.id,
-    this.inProduction,
-    this.languages,
-    this.lastAirDate,
+    required this.adult,
+    required this.backdropPath,
+    required this.createdBy,
+    required this.episodeRunTime,
+    required this.firstAirDate,
+    required this.genres,
+    required this.homepage,
+    required this.id,
+    required this.inProduction,
+    required this.languages,
+    required this.lastAirDate,
     this.lastEpisodeToAir,
-    this.name,
+    required this.name,
     this.nextEpisodeToAir,
-    this.networks,
-    this.numberOfEpisodes,
-    this.numberOfSeasons,
-    this.originCountry,
-    this.originalLanguage,
-    this.originalName,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.productionCompanies,
-    this.productionCountries,
-    this.seasons,
-    this.spokenLanguages,
-    this.status,
-    this.tagline,
-    this.type,
-    this.voteAverage,
-    this.voteCount,
+    required this.networks,
+    required this.numberOfEpisodes,
+    required this.numberOfSeasons,
+    required this.originCountry,
+    required this.originalLanguage,
+    required this.originalName,
+    required this.overview,
+    required this.popularity,
+    required this.posterPath,
+    required this.productionCompanies,
+    required this.productionCountries,
+    required this.seasons,
+    required this.spokenLanguages,
+    required this.status,
+    required this.tagline,
+    required this.type,
+    required this.voteAverage,
+    required this.voteCount,
   });
 
   @override

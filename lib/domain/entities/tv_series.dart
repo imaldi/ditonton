@@ -50,4 +50,11 @@ class TvSeries extends Equatable {
         voteAverage,
         voteCount,
       ];
+
+  TvSeries.watchlist({
+    required this.id,
+    required this.overview,
+    required this.posterPath,
+    required this.name,
+  });
 }
