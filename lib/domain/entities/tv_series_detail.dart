@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
 class TvSeriesDetail extends Equatable {
@@ -132,19 +133,6 @@ class CreatedBy extends Equatable {
         gender,
         profilePath,
       ];
-}
-
-class Genre extends Equatable {
-  int? id;
-  String? name;
-
-  Genre({
-    this.id,
-    this.name,
-  });
-
-  @override
-  List<Object?> get props => [id, name];
 }
 
 class TEpisodeToAir extends Equatable {

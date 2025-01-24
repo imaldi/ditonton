@@ -29,7 +29,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   @override
   Future<List<TvSeriesModel>> getNowPlayingTvSeries() async {
     final response =
-        await client.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY'));
+        await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
@@ -40,8 +40,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
-    final response =
-        await client.get(Uri.parse('$BASE_URL/movie/$id?$API_KEY'));
+    final response = await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvSeriesDetailResponse.fromJson(json.decode(response.body));
@@ -53,7 +52,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   @override
   Future<List<TvSeriesModel>> getTvSeriesRecommendations(int id) async {
     final response = await client
-        .get(Uri.parse('$BASE_URL/movie/$id/recommendations?$API_KEY'));
+        .get(Uri.parse('$BASE_URL/tv/$id/recommendations?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
@@ -65,7 +64,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   @override
   Future<List<TvSeriesModel>> getPopularTvSeries() async {
     final response =
-        await client.get(Uri.parse('$BASE_URL/movie/popular?$API_KEY'));
+        await client.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
@@ -77,7 +76,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   @override
   Future<List<TvSeriesModel>> getTopRatedTvSeries() async {
     final response =
-        await client.get(Uri.parse('$BASE_URL/movie/top_rated?$API_KEY'));
+        await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
@@ -89,7 +88,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   @override
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
     final response = await client
-        .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$query'));
+        .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$query'));
 
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;

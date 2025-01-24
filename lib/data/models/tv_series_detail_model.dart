@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
+import 'package:ditonton/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
 class TvSeriesDetailResponse {
