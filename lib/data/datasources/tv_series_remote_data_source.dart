@@ -10,7 +10,7 @@ import 'package:ditonton/data/models/tv_series_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class TvSeriesRemoteDataSource {
-  Future<List<TvSeriesModel>> getNowPlayingTvSeries();
+  Future<List<TvSeriesModel>> getAiringTodayTvSeries();
   Future<List<TvSeriesModel>> getPopularTvSeries();
   Future<List<TvSeriesModel>> getTopRatedTvSeries();
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id);
@@ -27,12 +27,12 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   TvSeriesRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<TvSeriesModel>> getNowPlayingTvSeries() async {
+  Future<List<TvSeriesModel>> getAiringTodayTvSeries() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
 
     if (response.statusCode == 200) {
-      return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
+      return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
       throw ServerException();
     }
@@ -55,7 +55,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
         .get(Uri.parse('$BASE_URL/tv/$id/recommendations?$API_KEY'));
 
     if (response.statusCode == 200) {
-      return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
+      return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
       throw ServerException();
     }
@@ -67,7 +67,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
         await client.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY'));
 
     if (response.statusCode == 200) {
-      return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
+      return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
       throw ServerException();
     }
@@ -79,7 +79,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
         await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
 
     if (response.statusCode == 200) {
-      return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
+      return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
       throw ServerException();
     }
@@ -91,7 +91,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
         .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$query'));
 
     if (response.statusCode == 200) {
-      return TvSeriesResponse.fromJson(json.decode(response.body)).movieList;
+      return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
       throw ServerException();
     }

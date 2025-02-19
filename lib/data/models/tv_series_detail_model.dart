@@ -2,7 +2,7 @@ import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
-class TvSeriesDetailResponse {
+class TvSeriesDetailResponse extends Equatable {
   final bool adult;
   final String backdropPath;
   final List<CreatedByModel> createdBy;
@@ -196,6 +196,42 @@ class TvSeriesDetailResponse {
       voteCount: voteCount,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    adult,
+    backdropPath,
+    createdBy,
+    episodeRunTime,
+    firstAirDate,
+    genres,
+    homepage,
+    id,
+    inProduction,
+    languages,
+    lastAirDate,
+    lastEpisodeToAir,
+    name,
+    nextEpisodeToAir,
+    networks,
+    numberOfEpisodes,
+    numberOfSeasons,
+    originCountry,
+    originalLanguage,
+    originalName,
+    overview,
+    popularity,
+    posterPath,
+    productionCompanies,
+    productionCountries,
+    seasons,
+    spokenLanguages,
+    status,
+    tagline,
+    type,
+    voteAverage,
+    voteCount,
+  ];
 }
 
 class CreatedByModel extends Equatable {
@@ -290,7 +326,7 @@ class TEpisodeToAirModel extends Equatable {
   final int id;
   final String name;
   final String overview;
-  final int voteAverage;
+  final double voteAverage;
   final int voteCount;
   final DateTime airDate;
   final int episodeNumber;
@@ -471,7 +507,7 @@ class SeasonModel extends Equatable {
   final int id;
   final String name;
   final String overview;
-  final String posterPath;
+  final String? posterPath;
   final int seasonNumber;
   final double voteAverage;
 

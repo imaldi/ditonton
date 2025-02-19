@@ -45,9 +45,9 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> getNowPlayingTvSeries() async {
+  Future<Either<Failure, List<TvSeries>>> getAiringTodayTvSeries() async {
     try {
-      final result = await remoteDataSource.getNowPlayingTvSeries();
+      final result = await remoteDataSource.getAiringTodayTvSeries();
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));

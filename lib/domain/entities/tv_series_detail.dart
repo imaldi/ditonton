@@ -139,7 +139,7 @@ class TEpisodeToAir extends Equatable {
   int? id;
   String? name;
   String? overview;
-  int? voteAverage;
+  double? voteAverage;
   int? voteCount;
   DateTime? airDate;
   int? episodeNumber;

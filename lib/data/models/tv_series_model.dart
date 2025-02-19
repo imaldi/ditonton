@@ -21,17 +21,17 @@ class TvSeriesModel extends Equatable {
   });
 
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final List<int> genreIds;
   final int id;
   final List<String> originCountry;
   final String originalLanguage;
-  final String originalName;
+  final String? originalName;
   final String overview;
   final double popularity;
   final String posterPath;
-  final DateTime firstAirDate;
-  final String name;
+  final String? firstAirDate;
+  final String? name;
   final double voteAverage;
   final int voteCount;
 
@@ -48,7 +48,7 @@ class TvSeriesModel extends Equatable {
         name: json["name"],
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
-        originCountry: List<String>.from(json["origin_country"].map((x) => x)),
+        originCountry: List<String>.from(json["origin_country"]?.map((x) => x)),
         originalLanguage: json['original_language'],
       );
 
