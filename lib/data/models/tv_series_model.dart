@@ -59,7 +59,7 @@ class TvSeriesModel extends Equatable {
         "id": id,
         "original_name": originalName,
         "origin_country": originCountry,
-        "originalLanguage": originalLanguage,
+        "original_language": originalLanguage,
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
