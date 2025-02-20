@@ -1,8 +1,12 @@
+import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_table.dart';
+import 'package:ditonton/data/models/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -38,9 +42,79 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
+final testTvSeriesDetail = TvSeriesDetail(
+  adult: false,
+  backdropPath: 'backdropPath',
+  genres: [Genre(id: 1, name: 'Action')],
+  id: 1,
+  originalName: 'originalName',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  firstAirDate: 'firstAirDate',
+  name: 'name',
+  voteAverage: 1,
+  voteCount: 1,
+  createdBy: [],
+  episodeRunTime: [],
+  homepage: 'https://google.com',
+  inProduction: false,
+  languages: [],
+  lastAirDate: '',
+  networks: [],
+  numberOfEpisodes: 12,
+  numberOfSeasons: 3,
+  originCountry: ['en'],
+  originalLanguage: 'en',
+  popularity: 4.5,
+  productionCompanies: [],
+  productionCountries: [],
+  seasons: [],
+  spokenLanguages: [],
+  status: 'Status',
+  tagline: 'Tagline',
+  type: '',
+  lastEpisodeToAir: TEpisodeToAir(
+    id: 1,
+    name: "name",
+    overview: "overview",
+    voteAverage: 2.2,
+    voteCount: 10,
+    airDate: "2024-02-02",
+    episodeNumber: 12,
+    episodeType: "episodeType",
+    productionCode: "pCode",
+    runtime: 3600,
+    seasonNumber: 3,
+    showId: 12312,
+    stillPath: "/stillPath",
+  ),
+  nextEpisodeToAir: TEpisodeToAir(
+    id: 1,
+    name: "name",
+    overview: "overview",
+    voteAverage: 2.2,
+    voteCount: 10,
+    airDate: "2024-02-02",
+    episodeNumber: 12,
+    episodeType: "episodeType",
+    productionCode: "pCode",
+    runtime: 3600,
+    seasonNumber: 3,
+    showId: 12314,
+    stillPath: "/stillPath",
+  ),
+);
+
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
+final testWatchlistTvSeries = TvSeries.watchlist(
+  id: 1,
+  name: 'name',
   posterPath: 'posterPath',
   overview: 'overview',
 );

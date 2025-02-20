@@ -6,13 +6,13 @@ class TvSeriesDetail extends Equatable {
   String backdropPath;
   List<CreatedBy> createdBy;
   List<dynamic> episodeRunTime;
-  DateTime firstAirDate;
+  String firstAirDate;
   List<Genre> genres;
   String homepage;
   int id;
   bool inProduction;
   List<String> languages;
-  DateTime lastAirDate;
+  String lastAirDate;
   TEpisodeToAir? lastEpisodeToAir;
   String name;
   TEpisodeToAir? nextEpisodeToAir;
@@ -141,7 +141,7 @@ class TEpisodeToAir extends Equatable {
   String? overview;
   double? voteAverage;
   int? voteCount;
-  DateTime? airDate;
+  String? airDate;
   int? episodeNumber;
   String? episodeType;
   String? productionCode;
