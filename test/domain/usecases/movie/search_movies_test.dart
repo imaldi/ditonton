@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/movie/search_movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late SearchMovies usecase;
@@ -18,7 +18,7 @@ void main() {
   final tMovies = <Movie>[];
   final tQuery = 'Spiderman';
 
-  test('should get list of movies from the repository', () async {
+  test('should get list of movie from the repository', () async {
     // arrange
     when(mockMovieRepository.searchMovies(tQuery))
         .thenAnswer((_) async => Right(tMovies));

@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/movie/get_top_rated_movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetTopRatedMovies usecase;
@@ -17,7 +17,7 @@ void main() {
 
   final tMovies = <Movie>[];
 
-  test('should get list of movies from repository', () async {
+  test('should get list of movie from repository', () async {
     // arrange
     when(mockMovieRepository.getTopRatedMovies())
         .thenAnswer((_) async => Right(tMovies));

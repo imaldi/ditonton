@@ -60,7 +60,7 @@ void main() {
         MovieResponse.fromJson(json.decode(readJson('dummy_data/popular.json')))
             .movieList;
 
-    test('should return list of movies when response is success (200)',
+    test('should return list of movie when response is success (200)',
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/popular?$API_KEY')))
@@ -90,7 +90,7 @@ void main() {
             json.decode(readJson('dummy_data/top_rated.json')))
         .movieList;
 
-    test('should return list of movies when response code is 200 ', () async {
+    test('should return list of movie when response code is 200 ', () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/top_rated?$API_KEY')))
           .thenAnswer((_) async =>
@@ -173,13 +173,13 @@ void main() {
     });
   });
 
-  group('search movies', () {
+  group('search movie', () {
     final tSearchResult = MovieResponse.fromJson(
             json.decode(readJson('dummy_data/search_spiderman_movie.json')))
         .movieList;
     final tQuery = 'Spiderman';
 
-    test('should return list of movies when response code is 200', () async {
+    test('should return list of movie when response code is 200', () async {
       // arrange
       when(mockHttpClient
               .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$tQuery')))

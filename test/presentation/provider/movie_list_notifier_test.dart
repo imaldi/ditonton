@@ -51,7 +51,7 @@ void main() {
   );
   final tMovieList = <Movie>[tMovie];
 
-  group('now playing movies', () {
+  group('now playing movie', () {
     test('initialState should be Empty', () {
       expect(provider.nowPlayingState, equals(RequestState.Empty));
     });
@@ -76,7 +76,7 @@ void main() {
       expect(provider.nowPlayingState, RequestState.Loading);
     });
 
-    test('should change movies when data is gotten successfully', () async {
+    test('should change movie when data is gotten successfully', () async {
       // arrange
       when(mockGetNowPlayingMovies.execute())
           .thenAnswer((_) async => Right(tMovieList));
@@ -101,7 +101,7 @@ void main() {
     });
   });
 
-  group('popular movies', () {
+  group('popular movie', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
       when(mockGetPopularMovies.execute())
@@ -113,7 +113,7 @@ void main() {
       // verify(provider.setState(RequestState.Loading));
     });
 
-    test('should change movies data when data is gotten successfully',
+    test('should change movie data when data is gotten successfully',
         () async {
       // arrange
       when(mockGetPopularMovies.execute())
@@ -139,7 +139,7 @@ void main() {
     });
   });
 
-  group('top rated movies', () {
+  group('top rated movie', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
       when(mockGetTopRatedMovies.execute())
@@ -150,7 +150,7 @@ void main() {
       expect(provider.topRatedMoviesState, RequestState.Loading);
     });
 
-    test('should change movies data when data is gotten successfully',
+    test('should change movie data when data is gotten successfully',
         () async {
       // arrange
       when(mockGetTopRatedMovies.execute())

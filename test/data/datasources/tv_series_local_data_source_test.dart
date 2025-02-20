@@ -90,7 +90,7 @@ void main() {
     });
   });
 
-  group('get watchlist movies', () {
+  group('get watchlist movie', () {
     test('should return list of TvSeriesTable from database', () async {
       // arrange
       when(mockDatabaseHelper.getWatchlistTvSeries())

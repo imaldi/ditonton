@@ -3,8 +3,8 @@ import 'package:ditonton/domain/usecases/movie/get_watchlist_movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../dummy_data/dummy_objects.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../dummy_data/dummy_objects.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetWatchlistMovies usecase;
@@ -15,7 +15,7 @@ void main() {
     usecase = GetWatchlistMovies(mockMovieRepository);
   });
 
-  test('should get list of movies from the repository', () async {
+  test('should get list of movie from the repository', () async {
     // arrange
     when(mockMovieRepository.getWatchlistMovies())
         .thenAnswer((_) async => Right(testMovieList));

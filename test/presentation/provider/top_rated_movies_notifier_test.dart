@@ -54,7 +54,7 @@ void main() {
     expect(listenerCallCount, 1);
   });
 
-  test('should change movies data when data is gotten successfully', () async {
+  test('should change movie data when data is gotten successfully', () async {
     // arrange
     when(mockGetTopRatedMovies.execute())
         .thenAnswer((_) async => Right(tMovieList));

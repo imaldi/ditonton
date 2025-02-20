@@ -44,7 +44,7 @@ void main() {
   final tMovieList = <Movie>[tMovieModel];
   final tQuery = 'spiderman';
 
-  group('search movies', () {
+  group('search movie', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
       when(mockSearchMovies.execute(tQuery))

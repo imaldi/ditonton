@@ -398,7 +398,7 @@ void main() {
     });
   });
 
-  group('get watchlist movies', () {
+  group('get watchlist movie', () {
     test('should return list of Movies', () async {
       // arrange
       when(mockLocalDataSource.getWatchlistMovies())

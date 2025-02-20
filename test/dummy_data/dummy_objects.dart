@@ -25,7 +25,26 @@ final testMovie = Movie(
   voteCount: 13507,
 );
 
+final testTvSeries = TvSeries(
+  adult: false,
+  backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
+  genreIds: [14, 28],
+  id: 557,
+  originalName: 'Loki',
+  overview:
+  'Loki',
+  popularity: 60.441,
+  posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+  firstAirDate: '2002-05-01',
+  name: 'Spider-Man',
+  voteAverage: 7.2,
+  voteCount: 13507,
+);
+
 final testMovieList = [testMovie];
+
+final testTvSeriesList = [testTvSeries];
+
 
 final testMovieDetail = MovieDetail(
   adult: false,
