@@ -158,7 +158,6 @@ void init() {
   locator.registerLazySingleton(() => GetWatchlistTvSeries(locator()));
   locator.registerLazySingleton(() => SaveWatchlistTvSeries(locator()));
   locator.registerLazySingleton(() => RemoveWatchlistTvSeries(locator()));
-  locator.registerLazySingleton(() => GetWatchlistTvSeries(locator()));
 
   // repository
   locator.registerLazySingleton<TvSeriesRepository>(
