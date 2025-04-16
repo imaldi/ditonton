@@ -106,7 +106,7 @@ class DetailContent extends StatelessWidget {
                               tvSeries.name,
                               style: kHeading5,
                             ),
-                            FilledButton(
+                            ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
                                   await Provider.of<TvSeriesDetailNotifier>(
