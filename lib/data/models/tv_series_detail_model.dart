@@ -1,5 +1,4 @@
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
-import 'package:ditonton/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
 import 'genre_model.dart';
@@ -324,18 +323,18 @@ class CreatedByModel extends Equatable {
 
 class TEpisodeToAirModel extends Equatable {
   final int id;
-  final String name;
-  final String overview;
-  final double voteAverage;
-  final int voteCount;
-  final String airDate;
-  final int episodeNumber;
-  final String episodeType;
-  final String productionCode;
-  final int runtime;
-  final int seasonNumber;
-  final int showId;
-  final String stillPath;
+  final String? name;
+  final String? overview;
+  final double? voteAverage;
+  final int? voteCount;
+  final String? airDate;
+  final int? episodeNumber;
+  final String? episodeType;
+  final String? productionCode;
+  final int? runtime;
+  final int? seasonNumber;
+  final int? showId;
+  final String? stillPath;
 
   TEpisodeToAirModel({
     required this.id,
