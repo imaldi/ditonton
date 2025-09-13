@@ -5,9 +5,9 @@ import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart
 import 'package:flutter/material.dart';
 
 class TvSeriesCard extends StatelessWidget {
-  final TvSeries movie;
+  final TvSeries tvSeries;
 
-  TvSeriesCard(this.movie);
+  TvSeriesCard(this.tvSeries);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class TvSeriesCard extends StatelessWidget {
           Navigator.pushNamed(
             context,
             TvSeriesDetailPage.ROUTE_NAME,
-            arguments: movie.id,
+            arguments: tvSeries.id,
           );
         },
         child: Stack(
@@ -35,14 +35,14 @@ class TvSeriesCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.name ?? '-',
+                      tvSeries.name ?? '-',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      movie.overview ?? '-',
+                      tvSeries.overview ?? '-',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -57,7 +57,7 @@ class TvSeriesCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',
                   width: 80,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),

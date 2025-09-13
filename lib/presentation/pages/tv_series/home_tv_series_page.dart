@@ -2,12 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/search_page.dart';
 import 'package:ditonton/presentation/pages/movies/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/search_page_tv_series.dart';
+import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier.dart';
@@ -43,7 +46,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SearchPageTvSeries.ROUTE_NAME);
             },
             icon: Icon(Icons.search),
           )
@@ -153,7 +156,7 @@ class TvSeriesList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MovieDetailPage.ROUTE_NAME,
+                  TvSeriesDetailPage.ROUTE_NAME,
                   arguments: tvSerie.id,
                 );
               },

@@ -41,6 +41,8 @@ import 'package:ditonton/presentation/provider/tv_series/watchlist_tv_series_not
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
+import 'domain/usecases/tv_series/get_watchlist_tv_series_status.dart';
+
 final locator = GetIt.instance;
 
 void init() {
@@ -155,6 +157,7 @@ void init() {
   locator.registerLazySingleton(() => GetTvSeriesDetail(locator()));
   locator.registerLazySingleton(() => GetTvSeriesRecommendations(locator()));
   locator.registerLazySingleton(() => SearchTvSeries(locator()));
+  locator.registerLazySingleton(() => GetWatchlistTvSeriesStatus(locator()));
   locator.registerLazySingleton(() => GetWatchlistTvSeries(locator()));
   locator.registerLazySingleton(() => SaveWatchlistTvSeries(locator()));
   locator.registerLazySingleton(() => RemoveWatchlistTvSeries(locator()));
