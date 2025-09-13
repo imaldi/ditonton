@@ -11,7 +11,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
-  static const ROUTE_NAME = '/detail';
+  static const ROUTE_NAME = '/detail-tv';
 
   final int id;
   TvSeriesDetailPage({required this.id});

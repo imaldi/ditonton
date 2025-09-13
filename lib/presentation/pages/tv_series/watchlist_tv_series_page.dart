@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistTvSeriesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/watchlist-tvSeries';
+  static const ROUTE_NAME = '/watchlist-tv-series';
 
   @override
   _WatchlistTvSeriesPageState createState() => _WatchlistTvSeriesPageState();

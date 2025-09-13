@@ -14,7 +14,11 @@ import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/drawer/app_drawer.dart';
+
 class HomeTvSeriesPage extends StatefulWidget {
+  static const ROUTE_NAME = '/home-tv';
+
   @override
   _HomeTvSeriesPageState createState() => _HomeTvSeriesPageState();
 }
@@ -33,44 +37,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
-                backgroundColor: Colors.grey.shade900,
-              ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade900,
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
-              onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
-              },
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
-              },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
-            ),
-          ],
-        ),
-      ),
+      drawer: AppDrawer(pageRouteName: HomeTvSeriesPage.ROUTE_NAME,),
       appBar: AppBar(
         title: Text('Ditonton'),
         actions: [

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PopularTvSeriesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/popular-tvSeries';
+  static const ROUTE_NAME = '/popular-tv-series';
 
   @override
   _PopularTvSeriesPageState createState() => _PopularTvSeriesPageState();
