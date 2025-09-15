@@ -5,35 +5,35 @@ import 'genre_model.dart';
 
 class TvSeriesDetailResponse extends Equatable {
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final List<CreatedByModel> createdBy;
   final List<dynamic> episodeRunTime;
-  final String firstAirDate;
+  final String? firstAirDate;
   final List<GenreModel> genres;
-  final String homepage;
+  final String? homepage;
   final int id;
   final bool inProduction;
   final List<String> languages;
-  final String lastAirDate;
+  final String? lastAirDate;
   final TEpisodeToAirModel? lastEpisodeToAir;
-  final String name;
+  final String? name;
   final TEpisodeToAirModel? nextEpisodeToAir;
   final List<NetworkModel> networks;
   final int numberOfEpisodes;
   final int numberOfSeasons;
   final List<String> originCountry;
-  final String originalLanguage;
-  final String originalName;
-  final String overview;
+  final String? originalLanguage;
+  final String? originalName;
+  final String? overview;
   final double popularity;
-  final String posterPath;
+  final String? posterPath;
   final List<NetworkModel> productionCompanies;
   final List<ProductionCountryModel> productionCountries;
   final List<SeasonModel> seasons;
   final List<SpokenLanguageModel> spokenLanguages;
-  final String status;
-  final String tagline;
-  final String type;
+  final String? status;
+  final String? tagline;
+  final String? type;
   final double voteAverage;
   final int voteCount;
 
@@ -162,35 +162,35 @@ class TvSeriesDetailResponse extends Equatable {
   TvSeriesDetail toEntity() {
     return TvSeriesDetail(
       adult: this.adult,
-      backdropPath: this.backdropPath,
+      backdropPath: this.backdropPath ?? '',
       createdBy: this.createdBy.map((e) => e.toEntity()).toList(),
       episodeRunTime: this.episodeRunTime,
-      firstAirDate: this.firstAirDate,
+      firstAirDate: this.firstAirDate ?? '',
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
-      homepage: this.homepage,
+      homepage: this.homepage ?? '',
       id: this.id,
       inProduction: this.inProduction,
       languages: this.languages,
-      lastAirDate: this.lastAirDate,
+      lastAirDate: this.lastAirDate ?? '',
       lastEpisodeToAir: this.lastEpisodeToAir?.toEntity(),
-      name: this.name,
+      name: this.name ?? '',
       nextEpisodeToAir: this.nextEpisodeToAir?.toEntity(),
       networks: this.networks.map((e) => e.toEntity()).toList(),
       numberOfEpisodes: this.numberOfEpisodes,
       numberOfSeasons: this.numberOfSeasons,
       originCountry: this.originCountry,
-      originalLanguage: this.originalLanguage,
-      originalName: this.originalName,
-      overview: this.overview,
+      originalLanguage: this.originalLanguage ?? '',
+      originalName: this.originalName ?? '',
+      overview: this.overview ?? '',
       popularity: this.popularity,
-      posterPath: this.posterPath,
+      posterPath: this.posterPath ?? '',
       productionCompanies: this.productionCompanies.map((e) => e.toEntity()).toList(),
       productionCountries: this.productionCountries.map((e) => e.toEntity()).toList(),
       seasons: this.seasons.map((e) => e.toEntity()).toList(),
       spokenLanguages: this.spokenLanguages.map((e) => e.toEntity()).toList(),
-      status: this.status,
-      tagline: this.tagline,
-      type: this.type,
+      status: this.status ?? '',
+      tagline: this.tagline ?? '',
+      type: this.type ?? '',
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
     );
@@ -235,9 +235,9 @@ class TvSeriesDetailResponse extends Equatable {
 
 class CreatedByModel extends Equatable {
   final int id;
-  final String creditId;
-  final String name;
-  final String originalName;
+  final String? creditId;
+  final String? name;
+  final String? originalName;
   final int gender;
   final dynamic profilePath;
 
@@ -292,7 +292,7 @@ class CreatedByModel extends Equatable {
 
 // class GenreModel extends Equatable {
 //   final int id;
-//   final String name;
+//   final String? name;
 //
 //   GenreModel({
 //     required this.id,
@@ -424,9 +424,9 @@ class TEpisodeToAirModel extends Equatable {
 
 class NetworkModel extends Equatable {
   final int id;
-  final String logoPath;
-  final String name;
-  final String originCountry;
+  final String? logoPath;
+  final String? name;
+  final String? originCountry;
 
   NetworkModel({
     required this.id,
@@ -469,8 +469,8 @@ class NetworkModel extends Equatable {
 }
 
 class ProductionCountryModel extends Equatable {
-  final String iso31661;
-  final String name;
+  final String? iso31661;
+  final String? name;
 
   ProductionCountryModel({
     required this.iso31661,
@@ -504,8 +504,8 @@ class SeasonModel extends Equatable {
   final DateTime airDate;
   final int episodeCount;
   final int id;
-  final String name;
-  final String overview;
+  final String? name;
+  final String? overview;
   final String? posterPath;
   final int seasonNumber;
   final double voteAverage;
@@ -571,9 +571,9 @@ class SeasonModel extends Equatable {
 }
 
 class SpokenLanguageModel extends Equatable {
-  final String englishName;
-  final String iso6391;
-  final String name;
+  final String? englishName;
+  final String? iso6391;
+  final String? name;
 
   SpokenLanguageModel({
     required this.englishName,
