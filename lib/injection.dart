@@ -38,6 +38,7 @@ import 'package:ditonton/presentation/provider/tv_series/tv_series_detail_notifi
 import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/tv_series_search_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
@@ -46,6 +47,7 @@ import 'domain/usecases/tv_series/get_watchlist_tv_series_status.dart';
 final locator = GetIt.instance;
 
 void init() {
+  WidgetsFlutterBinding.ensureInitialized();
   // MOVIES
   // provider
   locator.registerFactory(

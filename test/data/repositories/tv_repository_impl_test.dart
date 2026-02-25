@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series_model.dart';
@@ -80,7 +80,7 @@ void main() {
       // assert
       verify(mockRemoteDataSource.getAiringTodayTvSeries());
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-      final resultList = result.getOrElse(() => []);
+      final resultList = result.getOrElse((_) => []);
       expect(resultList, tTvSeriesList);
     });
 
@@ -122,7 +122,7 @@ void main() {
       final result = await repository.getPopularTvSeries();
       // assert
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-      final resultList = result.getOrElse(() => []);
+      final resultList = result.getOrElse((_) => []);
       expect(resultList, tTvSeriesList);
     });
 
@@ -162,7 +162,7 @@ void main() {
       final result = await repository.getTopRatedTvSeries();
       // assert
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-      final resultList = result.getOrElse(() => []);
+      final resultList = result.getOrElse((_) => []);
       expect(resultList, tTvSeriesList);
     });
 
@@ -311,7 +311,7 @@ void main() {
       // assert
       verify(mockRemoteDataSource.getTvSeriesRecommendations(tId));
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-      final resultList = result.getOrElse(() => []);
+      final resultList = result.getOrElse((_) => []);
       expect(resultList, equals(tTvSeriesList));
     });
 
@@ -355,7 +355,7 @@ void main() {
       final result = await repository.searchTvSeries(tQuery);
       // assert
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-      final resultList = result.getOrElse(() => []);
+      final resultList = result.getOrElse((_) => []);
       expect(resultList, tTvSeriesList);
     });
 
@@ -448,7 +448,7 @@ void main() {
       // act
       final result = await repository.getWatchlistTvSeries();
       // assert
-      final resultList = result.getOrElse(() => []);
+      final resultList = result.getOrElse((_) => []);
       expect(resultList, [testWatchlistTvSeries]);
     });
   });
