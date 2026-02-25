@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -17,6 +18,31 @@ void main() {
   late int listenerCallCount;
 
   setUp(() {
+
+    final tTvSeries = TvSeries(
+      adult: false,
+      backdropPath: 'backdropPath',
+      genreIds: [1, 2, 3],
+      id: 1,
+      originalName: 'originalName',
+      overview: 'overview',
+      popularity: 1,
+      posterPath: 'posterPath',
+      firstAirDate: 'firstAirDate',
+      name: 'name',
+      // video: false,
+      voteAverage: 1,
+      voteCount: 1,
+    );
+    final tTvSeriesList = <TvSeries>[tTvSeries];
+
+
+    provideDummy<Either<Failure, String>>(Right("Success"));
+    // provideDummy<Either<Failure, TvSeriesDetail>>(Right(testTvSeriesDetail));
+    provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
+    // provideDummy<Either<Failure, TvSeriesDetail>>(Left(ServerFailure('dummy error')));
+    provideDummy<Either<Failure, List<TvSeries>>>(Left(ServerFailure('dummy error')));
+
     listenerCallCount = 0;
     mockGetWatchlistTvSeries = MockGetWatchlistTvSeries();
     provider = WatchlistTvSeriesNotifier(

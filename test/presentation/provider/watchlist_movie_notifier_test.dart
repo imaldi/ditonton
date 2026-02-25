@@ -1,3 +1,5 @@
+import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -17,6 +19,29 @@ void main() {
   late int listenerCallCount;
 
   setUp(() {
+    final tMovie = Movie(
+      adult: false,
+      backdropPath: 'backdropPath',
+      genreIds: [1, 2, 3],
+      id: 1,
+      originalTitle: 'originalTitle',
+      overview: 'overview',
+      popularity: 1,
+      posterPath: 'posterPath',
+      releaseDate: 'releaseDate',
+      title: 'title',
+      video: false,
+      voteAverage: 1,
+      voteCount: 1,
+    );
+    final tMovieList = <Movie>[tMovie];
+
+    provideDummy<Either<Failure, String>>(Right("Success"));
+    // provideDummy<Either<Failure, MovieDetail>>(Right(testMovieDetail));
+    provideDummy<Either<Failure, List<Movie>>>(Right(tMovieList));
+    provideDummy<Either<Failure, MovieDetail>>(Left(ServerFailure('dummy error')));
+    provideDummy<Either<Failure, List<Movie>>>(Left(ServerFailure('dummy error')));
+
     listenerCallCount = 0;
     mockGetWatchlistMovies = MockGetWatchlistMovies();
     provider = WatchlistMovieNotifier(

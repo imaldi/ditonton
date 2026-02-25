@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -46,6 +47,12 @@ void main() {
   );
 
   final tTvSeriesList = <TvSeries>[tTvSeries];
+
+  provideDummy<Either<Failure, String>>(Right("Success"));
+  // provideDummy<Either<Failure, TvSeriesDetail>>(Right(testMovieDetail));
+  provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
+  provideDummy<Either<Failure, TvSeriesDetail>>(Left(ServerFailure('dummy error')));
+  provideDummy<Either<Failure, List<TvSeries>>>(Left(ServerFailure('dummy error')));
 
   test('should change state to loading when usecase is called', () async {
     // arrange

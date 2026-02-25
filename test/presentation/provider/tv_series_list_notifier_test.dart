@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import 'movie_list_notifier_test.mocks.dart';
 import 'tv_series_list_notifier_test.mocks.dart';
 
@@ -56,6 +58,13 @@ void main() {
     voteCount: 1,
   );
   final tTvSeriesList = <TvSeries>[tTvSeries];
+
+
+  provideDummy<Either<Failure, String>>(Right("Success"));
+  provideDummy<Either<Failure, TvSeriesDetail>>(Right(testTvSeriesDetail));
+  provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
+  provideDummy<Either<Failure, TvSeriesDetail>>(Left(ServerFailure('dummy error')));
+  provideDummy<Either<Failure, List<TvSeries>>>(Left(ServerFailure('dummy error')));
 
   group('now playing movie', () {
     test('initialState should be Empty', () {

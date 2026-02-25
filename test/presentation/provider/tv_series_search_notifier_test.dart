@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import 'movie_search_notifier_test.mocks.dart';
 import 'tv_series_search_notifier_test.mocks.dart';
 
@@ -47,6 +49,13 @@ void main() {
   );
   final tTvSeriesList = <TvSeries>[tTvSeriesModel];
   final tQuery = 'spiderman';
+
+
+  provideDummy<Either<Failure, String>>(Right("Success"));
+  provideDummy<Either<Failure, TvSeriesDetail>>(Right(testTvSeriesDetail));
+  provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
+  provideDummy<Either<Failure, TvSeriesDetail>>(Left(ServerFailure('dummy error')));
+  provideDummy<Either<Failure, List<TvSeries>>>(Left(ServerFailure('dummy error')));
 
   group('search movie', () {
     test('should change state to loading when usecase is called', () async {

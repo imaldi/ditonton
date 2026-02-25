@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/movie/get_now_playing_movies.dart';
@@ -50,6 +51,13 @@ void main() {
     voteCount: 1,
   );
   final tMovieList = <Movie>[tMovie];
+
+
+  provideDummy<Either<Failure, String>>(Right("Success"));
+  // provideDummy<Either<Failure, MovieDetail>>(Right(testMovieDetail));
+  provideDummy<Either<Failure, List<Movie>>>(Right(tMovieList));
+  provideDummy<Either<Failure, MovieDetail>>(Left(ServerFailure('dummy error')));
+  provideDummy<Either<Failure, List<Movie>>>(Left(ServerFailure('dummy error')));
 
   group('now playing movie', () {
     test('initialState should be Empty', () {

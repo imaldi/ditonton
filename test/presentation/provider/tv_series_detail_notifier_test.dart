@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
@@ -75,13 +76,21 @@ void main() {
     voteAverage: 1,
     voteCount: 1,
   );
-  final tTvSeriess = <TvSeries>[tTvSeries];
+
+  final tTvSeriesList = <TvSeries>[tTvSeries];
+
+
+  provideDummy<Either<Failure, String>>(Right("Success"));
+  provideDummy<Either<Failure, TvSeriesDetail>>(Right(testTvSeriesDetail));
+  provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
+  provideDummy<Either<Failure, TvSeriesDetail>>(Left(ServerFailure('dummy error')));
+  provideDummy<Either<Failure, List<TvSeries>>>(Left(ServerFailure('dummy error')));
 
   void _arrangeUsecase() {
     when(mockGetTvSeriesDetail.execute(tId))
         .thenAnswer((_) async => Right(testTvSeriesDetail));
     when(mockGetTvSeriesRecommendations.execute(tId))
-        .thenAnswer((_) async => Right(tTvSeriess));
+        .thenAnswer((_) async => Right(tTvSeriesList));
   }
 
   group('Get TvSeries Detail', () {
@@ -124,7 +133,7 @@ void main() {
       await provider.fetchTvSeriesDetail(tId);
       // assert
       expect(provider.tvSeriesState, RequestState.Loaded);
-      expect(provider.tvSeriesRecommendations, tTvSeriess);
+      expect(provider.tvSeriesRecommendations, tTvSeriesList);
     });
   });
 
@@ -136,7 +145,7 @@ void main() {
       await provider.fetchTvSeriesDetail(tId);
       // assert
       verify(mockGetTvSeriesRecommendations.execute(tId));
-      expect(provider.tvSeriesRecommendations, tTvSeriess);
+      expect(provider.tvSeriesRecommendations, tTvSeriesList);
     });
 
     test('should update recommendation state when data is gotten successfully',
@@ -147,7 +156,7 @@ void main() {
       await provider.fetchTvSeriesDetail(tId);
       // assert
       expect(provider.recommendationState, RequestState.Loaded);
-      expect(provider.tvSeriesRecommendations, tTvSeriess);
+      expect(provider.tvSeriesRecommendations, tTvSeriesList);
     });
 
     test('should update error message when request in successful', () async {
@@ -233,7 +242,7 @@ void main() {
       when(mockGetTvSeriesDetail.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       when(mockGetTvSeriesRecommendations.execute(tId))
-          .thenAnswer((_) async => Right(tTvSeriess));
+          .thenAnswer((_) async => Right(tTvSeriesList));
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert

@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -42,6 +43,12 @@ void main() {
   );
 
   final tMovieList = <Movie>[tMovie];
+
+  provideDummy<Either<Failure, String>>(Right("Success"));
+  // provideDummy<Either<Failure, MovieDetail>>(Right(testMovieDetail));
+  provideDummy<Either<Failure, List<Movie>>>(Right(tMovieList));
+  provideDummy<Either<Failure, MovieDetail>>(Left(ServerFailure('dummy error')));
+  provideDummy<Either<Failure, List<Movie>>>(Left(ServerFailure('dummy error')));
 
   test('should change state to loading when usecase is called', () async {
     // arrange
