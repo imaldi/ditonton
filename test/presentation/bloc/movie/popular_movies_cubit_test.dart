@@ -50,10 +50,7 @@ void main() {
       'should emit Loading when usecase is called',
       build: () {
         when(mockGetPopularMovies.execute())
-            .thenAnswer((_) async {
-              // await Future.delayed(Duration.zero);
-              return Right(tMovieList);
-            });
+            .thenAnswer((_) async => Right(tMovieList));
         return cubit;
       },
       act: (cubit) => cubit.fetchPopularMovies(),
