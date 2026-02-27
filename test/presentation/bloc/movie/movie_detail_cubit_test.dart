@@ -34,7 +34,24 @@ void main() {
   late MockRemoveWatchlist mockRemoveWatchlist;
 
   final tId = 1;
-  final tMovies = <Movie>[/* dummy Movie seperti di notifier test */];
+
+  final tMovie = Movie(
+    adult: false,
+    backdropPath: 'backdropPath',
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalTitle: 'originalTitle',
+    overview: 'overview',
+    popularity: 1,
+    posterPath: 'posterPath',
+    releaseDate: 'releaseDate',
+    title: 'title',
+    video: false,
+    voteAverage: 1,
+    voteCount: 1,
+  );
+  final tMovies = <Movie>[tMovie];
+
 
   setUp(() {
     mockGetMovieDetail = MockGetMovieDetail();
@@ -119,6 +136,7 @@ void main() {
       expect: () => [
         MovieDetailState(
           movieState: RequestState.Loading,
+          recommendations: tMovies,
         ),
         MovieDetailState(
           movieState: RequestState.Error,

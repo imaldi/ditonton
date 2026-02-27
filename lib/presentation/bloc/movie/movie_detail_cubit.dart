@@ -25,6 +25,7 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
   }) : super(const MovieDetailState());
 
   Future<void> fetchMovieDetail(int id) async {
+    final oldRecommendations = state.recommendations;
     emit(state.copyWith(
       movieState: RequestState.Loading,
       message: '',
@@ -38,6 +39,7 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
         emit(state.copyWith(
           movieState: RequestState.Error,
           message: failure.message,
+          recommendations: oldRecommendations,
         ));
       },
           (movie) {
@@ -47,12 +49,11 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
           message: '',
         ));
 
-        // Recommendations setelah detail sukses
         recommendationResult.fold(
               (failure) {
             emit(state.copyWith(
               recommendationState: RequestState.Error,
-              message: failure.message, // override message kalau perlu
+              message: failure.message,
             ));
           },
               (movies) {
