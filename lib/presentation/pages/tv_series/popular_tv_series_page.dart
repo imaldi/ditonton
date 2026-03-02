@@ -1,7 +1,9 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/tv_series/popular_tv_series_cubit.dart';
 import 'package:ditonton/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class PopularTvSeriesPage extends StatefulWidget {
@@ -16,7 +18,7 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<PopularTvSeriesNotifier>(context, listen: false)
+        context.read<PopularTvSeriesCubit>()
             .fetchPopularTvSeries());
   }
 
@@ -24,30 +26,33 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular TvSeries'),
+        title: Text('Popular Tv Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvSeriesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<PopularTvSeriesCubit, PopularTvSeriesState>(
+          builder: (context, state) {
+            final requestState = state.state;
+            final tvSeries = state.tvSeries;
+            final message = state.message;
+
+            return switch(requestState) {
+              RequestState.Empty => Container(),
+              RequestState.Loading => Center(
                 child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.Loaded) {
-              return ListView.builder(
+              ),
+              RequestState.Loaded => ListView.builder(
                 itemBuilder: (context, index) {
-                  final tvSeries = data.tvSeries[index];
-                  return TvSeriesCard(tvSeries);
+                  final tvSeries1 = tvSeries[index];
+                  return TvSeriesCard(tvSeries1);
                 },
-                itemCount: data.tvSeries.length,
-              );
-            } else {
-              return Center(
+                itemCount: tvSeries.length,
+              ),
+              RequestState.Error => Center(
                 key: Key('error_message'),
-                child: Text(data.message),
-              );
-            }
+                child: Text(message),
+              ),
+            };
           },
         ),
       ),

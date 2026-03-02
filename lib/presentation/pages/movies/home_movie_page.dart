@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_list_cubit.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_list_state.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
@@ -11,6 +13,7 @@ import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/widgets/drawer/app_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class HomeMoviePage extends StatefulWidget {
@@ -24,17 +27,16 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    Future.microtask(() => context.read<MovieListCubit>()
+        ..fetchNowPlayingMovies()
+        ..fetchPopularMovies()
+        ..fetchTopRatedMovies());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AppDrawer(pageRouteName: HomeMoviePage.ROUTE_NAME,),
+      drawer: AppDrawer(pageRouteName: HomeMoviePage.ROUTE_NAME),
       appBar: AppBar(
         title: Text('Ditonton'),
         actions: [
@@ -43,7 +45,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
             },
             icon: Icon(Icons.search),
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -52,56 +54,51 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
+              Text('Now Playing', style: kHeading6),
+              BlocBuilder<MovieListCubit, MovieListState>(
+                builder: (context, state) {
+                  return state.whenOrNull(
+                      loading: (_){
+                        return Center(child: CircularProgressIndicator());
+                      },
+                      loaded: (nowPlayingMovies, _, _){
+                        return MovieList(nowPlayingMovies);
+                      }
+                  ) ?? Text('Failed');
+                },
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<MovieListCubit,MovieListState>(
+                builder: (context, state) {
+                  return state.whenOrNull(
+                    loading: (_){
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    loaded: (_, popularMovies, _){
+                      return MovieList(popularMovies);
+                    }
+                  ) ?? Text('Failed');
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<MovieListCubit,MovieListState>(
+                builder: (context, state) {
+                  return state.whenOrNull(
+                      loading: (_){
+                        return Center(child: CircularProgressIndicator());
+                      },
+                      loaded: (_, _, topRatedMovies){
+                        return MovieList(topRatedMovies);
+                      }
+                  ) ?? Text('Failed');
+                },
+              ),
             ],
           ),
         ),
@@ -113,17 +110,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: kHeading6,
-        ),
+        Text(title, style: kHeading6),
         InkWell(
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
-            ),
+            child: Row(children: [Text('See More'), Icon(Icons.arrow_forward_ios)]),
           ),
         ),
       ],
@@ -148,19 +140,13 @@ class MovieList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  MovieDetailPage.ROUTE_NAME,
-                  arguments: movie.id,
-                );
+                Navigator.pushNamed(context, MovieDetailPage.ROUTE_NAME, arguments: movie.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),

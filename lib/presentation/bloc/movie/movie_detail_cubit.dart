@@ -16,6 +16,9 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
   final SaveWatchlist saveWatchlist;
   final RemoveWatchlist removeWatchlist;
 
+  static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+
   MovieDetailCubit({
     required this.getMovieDetail,
     required this.getMovieRecommendations,

@@ -1,5 +1,17 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_detail_cubit.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_list_cubit.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/bloc/movie/popular_movies_cubit.dart';
+import 'package:ditonton/presentation/bloc/movie/top_rated_movies_cubit.dart';
+import 'package:ditonton/presentation/bloc/movie/watchlist_movies_cubit.dart';
+import 'package:ditonton/presentation/bloc/tv_series/popular_tv_series_cubit.dart';
+import 'package:ditonton/presentation/bloc/tv_series/top_rated_tv_series_cubit.dart';
+import 'package:ditonton/presentation/bloc/tv_series/tv_series_detail_cubit.dart';
+import 'package:ditonton/presentation/bloc/tv_series/tv_series_list_cubit.dart';
+import 'package:ditonton/presentation/bloc/tv_series/tv_series_search_cubit.dart';
+import 'package:ditonton/presentation/bloc/tv_series/watchlist_tv_series_cubit.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movies/home_movie_page.dart';
@@ -27,6 +39,7 @@ import 'package:ditonton/presentation/provider/tv_series/tv_series_search_notifi
 import 'package:ditonton/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
@@ -38,44 +51,56 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvSeriesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvSeriesNotifier>(),
-        ),
+        BlocProvider(create: (_) => di.locator<MovieListCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<MovieListNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<MovieDetailCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<MovieDetailNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<MovieSearchCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<MovieSearchNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<TopRatedMoviesCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<PopularMoviesCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<PopularMoviesNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<WatchlistMoviesCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<WatchlistMovieNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<TvSeriesListCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TvSeriesListNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<TvSeriesDetailCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TvSeriesDetailNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<TvSeriesSearchCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TvSeriesSearchNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<TopRatedTvSeriesCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<PopularTvSeriesCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<PopularTvSeriesNotifier>(),
+        // ),
+        BlocProvider(create: (_) => di.locator<WatchlistTvSeriesCubit>()),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<WatchlistTvSeriesNotifier>(),
+        // ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -109,9 +134,9 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             case HomeTvSeriesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => HomeTvSeriesPage());
-            case PopularMoviesPage.ROUTE_NAME:
+            case PopularTvSeriesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => PopularTvSeriesPage());
-            case TopRatedMoviesPage.ROUTE_NAME:
+            case TopRatedTvSeriesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => TopRatedTvSeriesPage());
             case TvSeriesDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;

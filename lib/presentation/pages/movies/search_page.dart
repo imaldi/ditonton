@@ -1,8 +1,11 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_search_cubit.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_search_state.dart';
 import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
@@ -21,7 +24,8 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false)
+                // Provider.of<MovieSearchNotifier>(context, listen: false)
+                context.read<MovieSearchCubit>()
                     .fetchMovieSearch(query);
               },
               decoration: InputDecoration(
@@ -36,29 +40,32 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<MovieSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
-                  return Center(
+            BlocBuilder<MovieSearchCubit, MovieSearchState>(
+              builder: (context, state) {
+                final requestState = state.state;
+                final searchResult = state.searchResult;
+
+                return switch(requestState){
+                  RequestState.Empty => Expanded(
+                    child: Container(),
+                  ),
+                  RequestState.Loading => Center(
                     child: CircularProgressIndicator(),
-                  );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
-                  return Expanded(
+                  ),
+                  RequestState.Loaded => Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final movie = data.searchResult[index];
+                        final movie = searchResult[index];
                         return MovieCard(movie);
                       },
-                      itemCount: result.length,
+                      itemCount: searchResult.length,
                     ),
-                  );
-                } else {
-                  return Expanded(
-                    child: Container(),
-                  );
-                }
+                  ),
+                  RequestState.Error => Expanded(
+                    child: Container(child: Text("There is an error"),),
+                  ),
+                };
               },
             ),
           ],

@@ -19,6 +19,9 @@ class TvSeriesDetailCubit extends Cubit<TvSeriesDetailState> {
   final SaveWatchlistTvSeries saveWatchlist;
   final RemoveWatchlistTvSeries removeWatchlist;
 
+  static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+
   TvSeriesDetailCubit({
     required this.getTvSeriesDetail,
     required this.getTvSeriesRecommendations,
