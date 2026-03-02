@@ -97,7 +97,6 @@ class MovieListCubit extends Cubit<MovieListState> {
   /// Memuat semua kategori sekaligus (dipanggil saat halaman pertama kali dibuka)
   Future<void> fetchAll() async {
     // emit(const MovieListState.loading());
-
     await Future.wait([
       fetchNowPlayingMovies(),
       fetchPopularMovies(),

@@ -70,19 +70,6 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
     );
   }
 
-  // Future<void> addWatchlist(MovieDetail movie) async {
-  //   final result = await saveWatchlist.execute(movie);
-  //
-  //   final newMessage = result.fold(
-  //         (failure) => failure.message,
-  //         (success) => success ?? 'Added to Watchlist',
-  //   );
-  //
-  //   emit(state.copyWith(watchlistMessage: newMessage));
-  //
-  //   await loadWatchlistStatus(movie.id);
-  // }
-
   Future<void> addWatchlist(MovieDetail movie) async {
     final saveResult = await saveWatchlist.execute(movie);
 
