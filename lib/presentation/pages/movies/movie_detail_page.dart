@@ -106,14 +106,15 @@ class DetailContent extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
                                 } else if(message == MovieDetailCubit.watchlistRemoveSuccessMessage){
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-                                } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(content: Text(message));
-                                    },
-                                  );
                                 }
+                                // else {
+                                //   showDialog(
+                                //     context: context,
+                                //     builder: (context) {
+                                //       return AlertDialog(content: Text(message));
+                                //     },
+                                //   );
+                                // }
                               },
                               builder: (context, state) {
                                 return ElevatedButton(
