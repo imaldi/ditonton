@@ -18,79 +18,108 @@ class TvSeriesListCubit extends Cubit<TvSeriesListState> {
     required this.getNowPlayingTvSeries,
     required this.getPopularTvSeries,
     required this.getTopRatedTvSeries,
-  }) : super(const TvSeriesListState());
+  }) : super(const TvSeriesListState.initial());
 
   Future<void> fetchNowPlayingTvSeries() async {
-    emit(state.copyWith(nowPlayingState: RequestState.Loading, message: ''));
+    final oldNowPlaying = state.maybeWhen(loaded: (now, _, __) => now, orElse: () => <TvSeries>[]);
+    final oldPop = state.maybeWhen(loaded: (_, pop, __) => pop, orElse: () => <TvSeries>[]);
+    final oldTopRated = state.maybeWhen(loaded: (_, __, top) => top, orElse: () => <TvSeries>[]);
+
+    emit(const TvSeriesListState.loading(category: 'now_playing'));
 
     final result = await getNowPlayingTvSeries.execute();
 
-    result.fold(
-          (failure) {
-        emit(state.copyWith(
-          nowPlayingState: RequestState.Error,
-          message: failure.message,
-        ));
-      },
-          (tvSeriesData) {
-        emit(state.copyWith(
-          nowPlayingState: RequestState.Loaded,
-          nowPlayingTvSeries: tvSeriesData,
-          message: '',
-        ));
-      },
-    );
+    result.fold((failure) => emit(TvSeriesListState.error(failure.message)), (tvSeriesData) {
+      state.maybeWhen(
+        loaded: (nowPlaying, popular, topRated) {
+          emit(
+            TvSeriesListState.loaded(
+              nowPlayingTvSeries: tvSeriesData,
+              popularTvSeries: popular,
+              topRatedTvSeries: topRated,
+            ),
+          );
+        },
+        orElse: () {
+          emit(
+            TvSeriesListState.loaded(
+              nowPlayingTvSeries: tvSeriesData,
+              popularTvSeries: oldPop,
+              topRatedTvSeries: oldTopRated,
+            ),
+          );
+        },
+      );
+    });
   }
 
   Future<void> fetchPopularTvSeries() async {
-    emit(state.copyWith(popularState: RequestState.Loading, message: ''));
+    final oldNowPlaying = state.maybeWhen(loaded: (now, _, __) => now, orElse: () => <TvSeries>[]);
+    // final oldPop = state.maybeWhen(loaded: (_, pop, __) => pop, orElse: () => <TvSeries>[]);
+    final oldTopRated = state.maybeWhen(loaded: (_, __, top) => top, orElse: () => <TvSeries>[]);
+    emit(const TvSeriesListState.loading(category: 'popular'));
 
     final result = await getPopularTvSeries.execute();
 
-    result.fold(
-          (failure) {
-        emit(state.copyWith(
-          popularState: RequestState.Error,
-          message: failure.message,
-        ));
-      },
-          (tvSeriesData) {
-        emit(state.copyWith(
-          popularState: RequestState.Loaded,
-          popularTvSeries: tvSeriesData,
-          message: '',
-        ));
-      },
-    );
+    result.fold((failure) => emit(TvSeriesListState.error(failure.message)), (tvSeriesData) {
+      emit(
+        state.maybeMap(
+          loaded: (s) => s.copyWith(popularTvSeries: tvSeriesData),
+
+          orElse: () => TvSeriesListState.loaded(
+            nowPlayingTvSeries: oldNowPlaying,
+            popularTvSeries: tvSeriesData,
+            topRatedTvSeries: oldTopRated,
+          ),
+        ),
+      );
+      // state.maybeWhen(
+      //   loaded: (nowPlaying, popular, topRated) {
+      //     emit(TvSeriesListState.loaded(
+      //       nowPlayingTvSeries: oldNowPlaying,
+      //       popularTvSeries: tvSeriesData,
+      //       topRatedTvSeries: oldTopRated,
+      //     ));
+      //     // return s.copyWith(popularTvSeries: tvSeriesData);
+      //   },
+      //   orElse: () {
+      //     emit(TvSeriesListState.loaded(
+      //       nowPlayingTvSeries: oldNowPlaying,
+      //       popularTvSeries: tvSeriesData,
+      //       topRatedTvSeries: oldTopRated,
+      //     ));
+      //   },
+      // );
+      ;
+    });
   }
 
   Future<void> fetchTopRatedTvSeries() async {
-    emit(state.copyWith(topRatedState: RequestState.Loading, message: ''));
+    emit(const TvSeriesListState.loading(category: 'top_rated'));
+
+    // emit(state.copyWith(topRatedState: RequestState.Loading, message: ''));
 
     final result = await getTopRatedTvSeries.execute();
 
-    result.fold(
-          (failure) {
-        emit(state.copyWith(
-          topRatedState: RequestState.Error,
-          message: failure.message,
-        ));
-      },
-          (tvSeriesData) {
-        emit(state.copyWith(
-          topRatedState: RequestState.Loaded,
-          topRatedTvSeries: tvSeriesData,
-          message: '',
-        ));
-      },
-    );
+    result.fold((failure) => emit(TvSeriesListState.error(failure.message)), (tvSeriesData) {
+      state.maybeWhen(
+        loaded: (nowPlaying, popular, topRated) {
+          emit(
+            TvSeriesListState.loaded(
+              nowPlayingTvSeries: nowPlaying,
+              popularTvSeries: popular,
+              topRatedTvSeries: tvSeriesData,
+            ),
+          );
+        },
+        orElse: () {
+          emit(TvSeriesListState.loaded(topRatedTvSeries: tvSeriesData));
+        },
+      );
+    });
   }
 
   Future<void> fetchAll() async {
-    await Future.wait([
-      fetchNowPlayingTvSeries(),
-      fetchPopularTvSeries(),
-      fetchTopRatedTvSeries(),
-    ]);
+    await Future.wait([fetchNowPlayingTvSeries(), fetchPopularTvSeries(), fetchTopRatedTvSeries()]);
   }
 }

@@ -14,67 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TvSeriesListState {
 
- RequestState get nowPlayingState; List<TvSeries> get nowPlayingTvSeries; RequestState get popularState; List<TvSeries> get popularTvSeries; RequestState get topRatedState; List<TvSeries> get topRatedTvSeries; String get message;
-/// Create a copy of TvSeriesListState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$TvSeriesListStateCopyWith<TvSeriesListState> get copyWith => _$TvSeriesListStateCopyWithImpl<TvSeriesListState>(this as TvSeriesListState, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TvSeriesListState&&(identical(other.nowPlayingState, nowPlayingState) || other.nowPlayingState == nowPlayingState)&&const DeepCollectionEquality().equals(other.nowPlayingTvSeries, nowPlayingTvSeries)&&(identical(other.popularState, popularState) || other.popularState == popularState)&&const DeepCollectionEquality().equals(other.popularTvSeries, popularTvSeries)&&(identical(other.topRatedState, topRatedState) || other.topRatedState == topRatedState)&&const DeepCollectionEquality().equals(other.topRatedTvSeries, topRatedTvSeries)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TvSeriesListState);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,nowPlayingState,const DeepCollectionEquality().hash(nowPlayingTvSeries),popularState,const DeepCollectionEquality().hash(popularTvSeries),topRatedState,const DeepCollectionEquality().hash(topRatedTvSeries),message);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TvSeriesListState(nowPlayingState: $nowPlayingState, nowPlayingTvSeries: $nowPlayingTvSeries, popularState: $popularState, popularTvSeries: $popularTvSeries, topRatedState: $topRatedState, topRatedTvSeries: $topRatedTvSeries, message: $message)';
+  return 'TvSeriesListState()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $TvSeriesListStateCopyWith<$Res>  {
-  factory $TvSeriesListStateCopyWith(TvSeriesListState value, $Res Function(TvSeriesListState) _then) = _$TvSeriesListStateCopyWithImpl;
-@useResult
-$Res call({
- RequestState nowPlayingState, List<TvSeries> nowPlayingTvSeries, RequestState popularState, List<TvSeries> popularTvSeries, RequestState topRatedState, List<TvSeries> topRatedTvSeries, String message
-});
-
-
-
-
-}
-/// @nodoc
-class _$TvSeriesListStateCopyWithImpl<$Res>
-    implements $TvSeriesListStateCopyWith<$Res> {
-  _$TvSeriesListStateCopyWithImpl(this._self, this._then);
-
-  final TvSeriesListState _self;
-  final $Res Function(TvSeriesListState) _then;
-
-/// Create a copy of TvSeriesListState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? nowPlayingState = null,Object? nowPlayingTvSeries = null,Object? popularState = null,Object? popularTvSeries = null,Object? topRatedState = null,Object? topRatedTvSeries = null,Object? message = null,}) {
-  return _then(_self.copyWith(
-nowPlayingState: null == nowPlayingState ? _self.nowPlayingState : nowPlayingState // ignore: cast_nullable_to_non_nullable
-as RequestState,nowPlayingTvSeries: null == nowPlayingTvSeries ? _self.nowPlayingTvSeries : nowPlayingTvSeries // ignore: cast_nullable_to_non_nullable
-as List<TvSeries>,popularState: null == popularState ? _self.popularState : popularState // ignore: cast_nullable_to_non_nullable
-as RequestState,popularTvSeries: null == popularTvSeries ? _self.popularTvSeries : popularTvSeries // ignore: cast_nullable_to_non_nullable
-as List<TvSeries>,topRatedState: null == topRatedState ? _self.topRatedState : topRatedState // ignore: cast_nullable_to_non_nullable
-as RequestState,topRatedTvSeries: null == topRatedTvSeries ? _self.topRatedTvSeries : topRatedTvSeries // ignore: cast_nullable_to_non_nullable
-as List<TvSeries>,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
+class $TvSeriesListStateCopyWith<$Res>  {
+$TvSeriesListStateCopyWith(TvSeriesListState _, $Res Function(TvSeriesListState) __);
 }
 
 
@@ -92,11 +55,14 @@ extension TvSeriesListStatePatterns on TvSeriesListState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TvSeriesListState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Loaded value)?  loaded,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _TvSeriesListState() when $default != null:
-return $default(_that);case _:
+case _Initial() when initial != null:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Loaded() when loaded != null:
+return loaded(_that);case _Error() when error != null:
+return error(_that);case _:
   return orElse();
 
 }
@@ -114,11 +80,14 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TvSeriesListState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Loaded value)  loaded,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
-case _TvSeriesListState():
-return $default(_that);case _:
+case _Initial():
+return initial(_that);case _Loading():
+return loading(_that);case _Loaded():
+return loaded(_that);case _Error():
+return error(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -135,11 +104,14 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TvSeriesListState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Loaded value)?  loaded,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
-case _TvSeriesListState() when $default != null:
-return $default(_that);case _:
+case _Initial() when initial != null:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Loaded() when loaded != null:
+return loaded(_that);case _Error() when error != null:
+return error(_that);case _:
   return null;
 
 }
@@ -156,10 +128,13 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RequestState nowPlayingState,  List<TvSeries> nowPlayingTvSeries,  RequestState popularState,  List<TvSeries> popularTvSeries,  RequestState topRatedState,  List<TvSeries> topRatedTvSeries,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( String? category)?  loading,TResult Function( List<TvSeries> nowPlayingTvSeries,  List<TvSeries> popularTvSeries,  List<TvSeries> topRatedTvSeries)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _TvSeriesListState() when $default != null:
-return $default(_that.nowPlayingState,_that.nowPlayingTvSeries,_that.popularState,_that.popularTvSeries,_that.topRatedState,_that.topRatedTvSeries,_that.message);case _:
+case _Initial() when initial != null:
+return initial();case _Loading() when loading != null:
+return loading(_that.category);case _Loaded() when loaded != null:
+return loaded(_that.nowPlayingTvSeries,_that.popularTvSeries,_that.topRatedTvSeries);case _Error() when error != null:
+return error(_that.message);case _:
   return orElse();
 
 }
@@ -177,10 +152,13 @@ return $default(_that.nowPlayingState,_that.nowPlayingTvSeries,_that.popularStat
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RequestState nowPlayingState,  List<TvSeries> nowPlayingTvSeries,  RequestState popularState,  List<TvSeries> popularTvSeries,  RequestState topRatedState,  List<TvSeries> topRatedTvSeries,  String message)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( String? category)  loading,required TResult Function( List<TvSeries> nowPlayingTvSeries,  List<TvSeries> popularTvSeries,  List<TvSeries> topRatedTvSeries)  loaded,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
-case _TvSeriesListState():
-return $default(_that.nowPlayingState,_that.nowPlayingTvSeries,_that.popularState,_that.popularTvSeries,_that.topRatedState,_that.topRatedTvSeries,_that.message);case _:
+case _Initial():
+return initial();case _Loading():
+return loading(_that.category);case _Loaded():
+return loaded(_that.nowPlayingTvSeries,_that.popularTvSeries,_that.topRatedTvSeries);case _Error():
+return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +175,13 @@ return $default(_that.nowPlayingState,_that.nowPlayingTvSeries,_that.popularStat
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RequestState nowPlayingState,  List<TvSeries> nowPlayingTvSeries,  RequestState popularState,  List<TvSeries> popularTvSeries,  RequestState topRatedState,  List<TvSeries> topRatedTvSeries,  String message)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( String? category)?  loading,TResult? Function( List<TvSeries> nowPlayingTvSeries,  List<TvSeries> popularTvSeries,  List<TvSeries> topRatedTvSeries)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
-case _TvSeriesListState() when $default != null:
-return $default(_that.nowPlayingState,_that.nowPlayingTvSeries,_that.popularState,_that.popularTvSeries,_that.topRatedState,_that.topRatedTvSeries,_that.message);case _:
+case _Initial() when initial != null:
+return initial();case _Loading() when loading != null:
+return loading(_that.category);case _Loaded() when loaded != null:
+return loaded(_that.nowPlayingTvSeries,_that.popularTvSeries,_that.topRatedTvSeries);case _Error() when error != null:
+return error(_that.message);case _:
   return null;
 
 }
@@ -211,67 +192,75 @@ return $default(_that.nowPlayingState,_that.nowPlayingTvSeries,_that.popularStat
 /// @nodoc
 
 
-class _TvSeriesListState implements TvSeriesListState {
-  const _TvSeriesListState({this.nowPlayingState = RequestState.Empty, final  List<TvSeries> nowPlayingTvSeries = const [], this.popularState = RequestState.Empty, final  List<TvSeries> popularTvSeries = const [], this.topRatedState = RequestState.Empty, final  List<TvSeries> topRatedTvSeries = const [], this.message = ''}): _nowPlayingTvSeries = nowPlayingTvSeries,_popularTvSeries = popularTvSeries,_topRatedTvSeries = topRatedTvSeries;
+class _Initial implements TvSeriesListState {
+  const _Initial();
   
 
-@override@JsonKey() final  RequestState nowPlayingState;
- final  List<TvSeries> _nowPlayingTvSeries;
-@override@JsonKey() List<TvSeries> get nowPlayingTvSeries {
-  if (_nowPlayingTvSeries is EqualUnmodifiableListView) return _nowPlayingTvSeries;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_nowPlayingTvSeries);
-}
 
-@override@JsonKey() final  RequestState popularState;
- final  List<TvSeries> _popularTvSeries;
-@override@JsonKey() List<TvSeries> get popularTvSeries {
-  if (_popularTvSeries is EqualUnmodifiableListView) return _popularTvSeries;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_popularTvSeries);
-}
 
-@override@JsonKey() final  RequestState topRatedState;
- final  List<TvSeries> _topRatedTvSeries;
-@override@JsonKey() List<TvSeries> get topRatedTvSeries {
-  if (_topRatedTvSeries is EqualUnmodifiableListView) return _topRatedTvSeries;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_topRatedTvSeries);
-}
-
-@override@JsonKey() final  String message;
-
-/// Create a copy of TvSeriesListState
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$TvSeriesListStateCopyWith<_TvSeriesListState> get copyWith => __$TvSeriesListStateCopyWithImpl<_TvSeriesListState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TvSeriesListState&&(identical(other.nowPlayingState, nowPlayingState) || other.nowPlayingState == nowPlayingState)&&const DeepCollectionEquality().equals(other._nowPlayingTvSeries, _nowPlayingTvSeries)&&(identical(other.popularState, popularState) || other.popularState == popularState)&&const DeepCollectionEquality().equals(other._popularTvSeries, _popularTvSeries)&&(identical(other.topRatedState, topRatedState) || other.topRatedState == topRatedState)&&const DeepCollectionEquality().equals(other._topRatedTvSeries, _topRatedTvSeries)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,nowPlayingState,const DeepCollectionEquality().hash(_nowPlayingTvSeries),popularState,const DeepCollectionEquality().hash(_popularTvSeries),topRatedState,const DeepCollectionEquality().hash(_topRatedTvSeries),message);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TvSeriesListState(nowPlayingState: $nowPlayingState, nowPlayingTvSeries: $nowPlayingTvSeries, popularState: $popularState, popularTvSeries: $popularTvSeries, topRatedState: $topRatedState, topRatedTvSeries: $topRatedTvSeries, message: $message)';
+  return 'TvSeriesListState.initial()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Loading implements TvSeriesListState {
+  const _Loading({this.category});
+  
+
+ final  String? category;
+
+/// Create a copy of TvSeriesListState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoadingCopyWith<_Loading> get copyWith => __$LoadingCopyWithImpl<_Loading>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading&&(identical(other.category, category) || other.category == category));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,category);
+
+@override
+String toString() {
+  return 'TvSeriesListState.loading(category: $category)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$TvSeriesListStateCopyWith<$Res> implements $TvSeriesListStateCopyWith<$Res> {
-  factory _$TvSeriesListStateCopyWith(_TvSeriesListState value, $Res Function(_TvSeriesListState) _then) = __$TvSeriesListStateCopyWithImpl;
-@override @useResult
+abstract mixin class _$LoadingCopyWith<$Res> implements $TvSeriesListStateCopyWith<$Res> {
+  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) _then) = __$LoadingCopyWithImpl;
+@useResult
 $Res call({
- RequestState nowPlayingState, List<TvSeries> nowPlayingTvSeries, RequestState popularState, List<TvSeries> popularTvSeries, RequestState topRatedState, List<TvSeries> topRatedTvSeries, String message
+ String? category
 });
 
 
@@ -279,24 +268,172 @@ $Res call({
 
 }
 /// @nodoc
-class __$TvSeriesListStateCopyWithImpl<$Res>
-    implements _$TvSeriesListStateCopyWith<$Res> {
-  __$TvSeriesListStateCopyWithImpl(this._self, this._then);
+class __$LoadingCopyWithImpl<$Res>
+    implements _$LoadingCopyWith<$Res> {
+  __$LoadingCopyWithImpl(this._self, this._then);
 
-  final _TvSeriesListState _self;
-  final $Res Function(_TvSeriesListState) _then;
+  final _Loading _self;
+  final $Res Function(_Loading) _then;
 
 /// Create a copy of TvSeriesListState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? nowPlayingState = null,Object? nowPlayingTvSeries = null,Object? popularState = null,Object? popularTvSeries = null,Object? topRatedState = null,Object? topRatedTvSeries = null,Object? message = null,}) {
-  return _then(_TvSeriesListState(
-nowPlayingState: null == nowPlayingState ? _self.nowPlayingState : nowPlayingState // ignore: cast_nullable_to_non_nullable
-as RequestState,nowPlayingTvSeries: null == nowPlayingTvSeries ? _self._nowPlayingTvSeries : nowPlayingTvSeries // ignore: cast_nullable_to_non_nullable
-as List<TvSeries>,popularState: null == popularState ? _self.popularState : popularState // ignore: cast_nullable_to_non_nullable
-as RequestState,popularTvSeries: null == popularTvSeries ? _self._popularTvSeries : popularTvSeries // ignore: cast_nullable_to_non_nullable
-as List<TvSeries>,topRatedState: null == topRatedState ? _self.topRatedState : topRatedState // ignore: cast_nullable_to_non_nullable
-as RequestState,topRatedTvSeries: null == topRatedTvSeries ? _self._topRatedTvSeries : topRatedTvSeries // ignore: cast_nullable_to_non_nullable
-as List<TvSeries>,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') $Res call({Object? category = freezed,}) {
+  return _then(_Loading(
+category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Loaded implements TvSeriesListState {
+  const _Loaded({final  List<TvSeries> nowPlayingTvSeries = const [], final  List<TvSeries> popularTvSeries = const [], final  List<TvSeries> topRatedTvSeries = const []}): _nowPlayingTvSeries = nowPlayingTvSeries,_popularTvSeries = popularTvSeries,_topRatedTvSeries = topRatedTvSeries;
+  
+
+ final  List<TvSeries> _nowPlayingTvSeries;
+@JsonKey() List<TvSeries> get nowPlayingTvSeries {
+  if (_nowPlayingTvSeries is EqualUnmodifiableListView) return _nowPlayingTvSeries;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_nowPlayingTvSeries);
+}
+
+ final  List<TvSeries> _popularTvSeries;
+@JsonKey() List<TvSeries> get popularTvSeries {
+  if (_popularTvSeries is EqualUnmodifiableListView) return _popularTvSeries;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_popularTvSeries);
+}
+
+ final  List<TvSeries> _topRatedTvSeries;
+@JsonKey() List<TvSeries> get topRatedTvSeries {
+  if (_topRatedTvSeries is EqualUnmodifiableListView) return _topRatedTvSeries;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_topRatedTvSeries);
+}
+
+
+/// Create a copy of TvSeriesListState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&const DeepCollectionEquality().equals(other._nowPlayingTvSeries, _nowPlayingTvSeries)&&const DeepCollectionEquality().equals(other._popularTvSeries, _popularTvSeries)&&const DeepCollectionEquality().equals(other._topRatedTvSeries, _topRatedTvSeries));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_nowPlayingTvSeries),const DeepCollectionEquality().hash(_popularTvSeries),const DeepCollectionEquality().hash(_topRatedTvSeries));
+
+@override
+String toString() {
+  return 'TvSeriesListState.loaded(nowPlayingTvSeries: $nowPlayingTvSeries, popularTvSeries: $popularTvSeries, topRatedTvSeries: $topRatedTvSeries)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LoadedCopyWith<$Res> implements $TvSeriesListStateCopyWith<$Res> {
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
+@useResult
+$Res call({
+ List<TvSeries> nowPlayingTvSeries, List<TvSeries> popularTvSeries, List<TvSeries> topRatedTvSeries
+});
+
+
+
+
+}
+/// @nodoc
+class __$LoadedCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(this._self, this._then);
+
+  final _Loaded _self;
+  final $Res Function(_Loaded) _then;
+
+/// Create a copy of TvSeriesListState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? nowPlayingTvSeries = null,Object? popularTvSeries = null,Object? topRatedTvSeries = null,}) {
+  return _then(_Loaded(
+nowPlayingTvSeries: null == nowPlayingTvSeries ? _self._nowPlayingTvSeries : nowPlayingTvSeries // ignore: cast_nullable_to_non_nullable
+as List<TvSeries>,popularTvSeries: null == popularTvSeries ? _self._popularTvSeries : popularTvSeries // ignore: cast_nullable_to_non_nullable
+as List<TvSeries>,topRatedTvSeries: null == topRatedTvSeries ? _self._topRatedTvSeries : topRatedTvSeries // ignore: cast_nullable_to_non_nullable
+as List<TvSeries>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Error implements TvSeriesListState {
+  const _Error(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of TvSeriesListState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'TvSeriesListState.error(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ErrorCopyWith<$Res> implements $TvSeriesListStateCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ErrorCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(this._self, this._then);
+
+  final _Error _self;
+  final $Res Function(_Error) _then;
+
+/// Create a copy of TvSeriesListState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_Error(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

@@ -38,6 +38,10 @@ void main() {
   final tTvSeriesList = <TvSeries>[tTvSeries];
 
   setUp(() {
+    provideDummy<Either<Failure, String>>(const Right('Success'));
+    provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
+    provideDummy<Either<Failure, List<TvSeries>>>(Left(ServerFailure('dummy error')));
+
     mockGetNowPlayingTvSeries = MockGetNowPlayingTvSeries();
     mockGetPopularTvSeries = MockGetPopularTvSeries();
     mockGetTopRatedTvSeries = MockGetTopRatedTvSeries();
@@ -47,28 +51,27 @@ void main() {
       getPopularTvSeries: mockGetPopularTvSeries,
       getTopRatedTvSeries: mockGetTopRatedTvSeries,
     );
-
-    provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
-    provideDummy<Either<Failure, List<TvSeries>>>(Left(ServerFailure('dummy error')));
   });
 
   tearDown(() => cubit.close());
+
+  group('initial state', () {
+    test('should be initial', () {
+      expect(cubit.state, const TvSeriesListState.initial());
+    });
+  });
 
   group('fetchNowPlayingTvSeries', () {
     blocTest<TvSeriesListCubit, TvSeriesListState>(
       'should emit Loading then Loaded when successful',
       build: () {
-        when(mockGetNowPlayingTvSeries.execute())
-            .thenAnswer((_) async => Right(tTvSeriesList));
+        when(mockGetNowPlayingTvSeries.execute()).thenAnswer((_) async => Right(tTvSeriesList));
         return cubit;
       },
       act: (cubit) => cubit.fetchNowPlayingTvSeries(),
       expect: () => [
-        const TvSeriesListState(nowPlayingState: RequestState.Loading),
-        TvSeriesListState(
-          nowPlayingState: RequestState.Loaded,
-          nowPlayingTvSeries: tTvSeriesList,
-        ),
+        const TvSeriesListState.loading(category: 'now_playing'),
+        TvSeriesListState.loaded(nowPlayingTvSeries: tTvSeriesList),
       ],
       verify: (_) {
         verify(mockGetNowPlayingTvSeries.execute()).called(1);
@@ -78,17 +81,13 @@ void main() {
     blocTest<TvSeriesListCubit, TvSeriesListState>(
       'should emit Loading then Error when failure',
       build: () {
-        when(mockGetNowPlayingTvSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetNowPlayingTvSeries.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return cubit;
       },
       act: (cubit) => cubit.fetchNowPlayingTvSeries(),
       expect: () => [
-        const TvSeriesListState(nowPlayingState: RequestState.Loading),
-        const TvSeriesListState(
-          nowPlayingState: RequestState.Error,
-          message: 'Server Failure',
-        ),
+        const TvSeriesListState.loading(category: 'now_playing'),
+        const TvSeriesListState.error('Server Failure'),
       ],
       verify: (_) {
         verify(mockGetNowPlayingTvSeries.execute()).called(1);
@@ -97,20 +96,16 @@ void main() {
   });
 
   group('fetchPopularTvSeries', () {
-    blocTest<TvSeriesListCubit, TvSeriesListState>(
+     blocTest<TvSeriesListCubit, TvSeriesListState>(
       'should emit Loading then Loaded when successful',
       build: () {
-        when(mockGetPopularTvSeries.execute())
-            .thenAnswer((_) async => Right(tTvSeriesList));
+        when(mockGetPopularTvSeries.execute()).thenAnswer((_) async => Right(tTvSeriesList));
         return cubit;
       },
       act: (cubit) => cubit.fetchPopularTvSeries(),
       expect: () => [
-        const TvSeriesListState(popularState: RequestState.Loading),
-        TvSeriesListState(
-          popularState: RequestState.Loaded,
-          popularTvSeries: tTvSeriesList,
-        ),
+        const TvSeriesListState.loading(category: 'popular'),
+        TvSeriesListState.loaded(popularTvSeries: tTvSeriesList),
       ],
       verify: (_) {
         verify(mockGetPopularTvSeries.execute()).called(1);
@@ -120,17 +115,13 @@ void main() {
     blocTest<TvSeriesListCubit, TvSeriesListState>(
       'should emit Loading then Error when failure',
       build: () {
-        when(mockGetPopularTvSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetPopularTvSeries.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return cubit;
       },
       act: (cubit) => cubit.fetchPopularTvSeries(),
       expect: () => [
-        const TvSeriesListState(popularState: RequestState.Loading),
-        const TvSeriesListState(
-          popularState: RequestState.Error,
-          message: 'Server Failure',
-        ),
+        const TvSeriesListState.loading(category: 'popular'),
+        const TvSeriesListState.error('Server Failure'),
       ],
       verify: (_) {
         verify(mockGetPopularTvSeries.execute()).called(1);
@@ -142,17 +133,13 @@ void main() {
     blocTest<TvSeriesListCubit, TvSeriesListState>(
       'should emit Loading then Loaded when successful',
       build: () {
-        when(mockGetTopRatedTvSeries.execute())
-            .thenAnswer((_) async => Right(tTvSeriesList));
+        when(mockGetTopRatedTvSeries.execute()).thenAnswer((_) async => Right(tTvSeriesList));
         return cubit;
       },
       act: (cubit) => cubit.fetchTopRatedTvSeries(),
       expect: () => [
-        const TvSeriesListState(topRatedState: RequestState.Loading),
-        TvSeriesListState(
-          topRatedState: RequestState.Loaded,
-          topRatedTvSeries: tTvSeriesList,
-        ),
+        const TvSeriesListState.loading(category: 'top_rated'),
+        TvSeriesListState.loaded(topRatedTvSeries: tTvSeriesList),
       ],
       verify: (_) {
         verify(mockGetTopRatedTvSeries.execute()).called(1);
@@ -162,17 +149,13 @@ void main() {
     blocTest<TvSeriesListCubit, TvSeriesListState>(
       'should emit Loading then Error when failure',
       build: () {
-        when(mockGetTopRatedTvSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetTopRatedTvSeries.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return cubit;
       },
       act: (cubit) => cubit.fetchTopRatedTvSeries(),
       expect: () => [
-        const TvSeriesListState(topRatedState: RequestState.Loading),
-        const TvSeriesListState(
-          topRatedState: RequestState.Error,
-          message: 'Server Failure',
-        ),
+        const TvSeriesListState.loading(category: 'top_rated'),
+        const TvSeriesListState.error('Server Failure'),
       ],
       verify: (_) {
         verify(mockGetTopRatedTvSeries.execute()).called(1);

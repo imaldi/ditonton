@@ -68,17 +68,28 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                 style: kHeading6,
               ),
               BlocBuilder<TvSeriesListCubit, TvSeriesListState>(builder: (context, state) {
-                final nowPlayingState = state.nowPlayingState;
-                final nowPlayingTvSeries = state.nowPlayingTvSeries;
-                // final state = data.nowPlayingState;
-                return switch(nowPlayingState){
-                  RequestState.Empty => Container(),
-                  RequestState.Loading => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  RequestState.Loaded => TvSeriesList(nowPlayingTvSeries),
-                  RequestState.Error => Text('Failed'),
-                };
+                // final nowPlayingState = state.nowPlayingState;
+                // final nowPlayingTvSeries = state.nowPlayingTvSeries;
+                // // final state = data.nowPlayingState;
+                // return switch(nowPlayingState){
+                //   RequestState.Empty => Container(),
+                //   RequestState.Loading => Center(
+                //     child: CircularProgressIndicator(),
+                //   ),
+                //   RequestState.Loaded => TvSeriesList(nowPlayingTvSeries),
+                //   RequestState.Error => Text('Failed'),
+                // };
+
+
+                return state.whenOrNull(
+                    error: (_) => Text('Failed'),
+                    loading: (_){
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    loaded: (nowPlayingTvSeries, _, _){
+                      return TvSeriesList(nowPlayingTvSeries);
+                    }
+                ) ?? Container();
               }),
               _buildSubHeading(
                 title: 'Popular',
@@ -86,16 +97,16 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME),
               ),
               BlocBuilder<TvSeriesListCubit, TvSeriesListState>(builder: (context, state) {
-                final popularTvSeries = state.popularTvSeries;
-                final requestState = state.popularState;
-                return switch(requestState){
-                  RequestState.Empty => Container(),
-                  RequestState.Loading => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  RequestState.Loaded => TvSeriesList(popularTvSeries),
-                  RequestState.Error => Text('Failed'),
-                };
+
+                return state.whenOrNull(
+                    error: (_) => Text('Failed'),
+                    loading: (_){
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    loaded: (_, popularTvSeries, _){
+                      return TvSeriesList(popularTvSeries);
+                    }
+                ) ?? Container();
               }),
               _buildSubHeading(
                 title: 'Top Rated',
@@ -103,16 +114,27 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME),
               ),
               BlocBuilder<TvSeriesListCubit, TvSeriesListState>(builder: (context, state) {
-                final topRatedTvSeries = state.topRatedTvSeries;
-                final requestState = state.popularState;
-                return switch(requestState){
-                  RequestState.Empty => Container(),
-                  RequestState.Loading => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  RequestState.Loaded => TvSeriesList(topRatedTvSeries),
-                  RequestState.Error => Text('Failed'),
-                };
+                // final topRatedTvSeries = state.topRatedTvSeries;
+                // final requestState = state.popularState;
+                // return switch(requestState){
+                //   RequestState.Empty => Container(),
+                //   RequestState.Loading => Center(
+                //     child: CircularProgressIndicator(),
+                //   ),
+                //   RequestState.Loaded => TvSeriesList(topRatedTvSeries),
+                //   RequestState.Error => Text('Failed'),
+                // };
+
+
+                return state.whenOrNull(
+                    error: (_) => Text('Failed'),
+                    loading: (_){
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    loaded: (_, _, topRatedTvSeries){
+                      return TvSeriesList(topRatedTvSeries);
+                    }
+                ) ?? Container();
               }),
             ],
           ),
