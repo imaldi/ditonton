@@ -3,16 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
-import 'dart:ui' as _i8;
+import 'dart:async' as _i5;
 
-import 'package:ditonton/common/state_enum.dart' as _i4;
-import 'package:ditonton/domain/entities/movie.dart' as _i5;
 import 'package:ditonton/domain/usecases/movie/get_popular_movies.dart' as _i2;
-import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart'
+import 'package:ditonton/presentation/bloc/movie/popular_movies_cubit.dart'
+    as _i4;
+import 'package:ditonton/presentation/bloc/movie/popular_movies_state.dart'
     as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -35,15 +34,17 @@ class _FakeGetPopularMovies_0 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [PopularMoviesNotifier].
+class _FakePopularMoviesState_1 extends _i1.SmartFake
+    implements _i3.PopularMoviesState {
+  _FakePopularMoviesState_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+/// A class which mocks [PopularMoviesCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPopularMoviesNotifier extends _i1.Mock
-    implements _i3.PopularMoviesNotifier {
-  MockPopularMoviesNotifier() {
-    _i1.throwOnMissingStub(this);
-  }
-
+class MockPopularMoviesCubit extends _i1.Mock
+    implements _i4.PopularMoviesCubit {
   @override
   _i2.GetPopularMovies get getPopularMovies =>
       (super.noSuchMethod(
@@ -52,71 +53,87 @@ class MockPopularMoviesNotifier extends _i1.Mock
               this,
               Invocation.getter(#getPopularMovies),
             ),
+            returnValueForMissingStub: _FakeGetPopularMovies_0(
+              this,
+              Invocation.getter(#getPopularMovies),
+            ),
           )
           as _i2.GetPopularMovies);
 
   @override
-  _i4.RequestState get state =>
+  _i3.PopularMoviesState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
-            returnValue: _i4.RequestState.Empty,
-          )
-          as _i4.RequestState);
-
-  @override
-  List<_i5.Movie> get movies =>
-      (super.noSuchMethod(
-            Invocation.getter(#movies),
-            returnValue: <_i5.Movie>[],
-          )
-          as List<_i5.Movie>);
-
-  @override
-  String get message =>
-      (super.noSuchMethod(
-            Invocation.getter(#message),
-            returnValue: _i6.dummyValue<String>(
+            returnValue: _FakePopularMoviesState_1(
               this,
-              Invocation.getter(#message),
+              Invocation.getter(#state),
+            ),
+            returnValueForMissingStub: _FakePopularMoviesState_1(
+              this,
+              Invocation.getter(#state),
             ),
           )
-          as String);
+          as _i3.PopularMoviesState);
 
   @override
-  bool get hasListeners =>
-      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+  _i5.Stream<_i3.PopularMoviesState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i5.Stream<_i3.PopularMoviesState>.empty(),
+            returnValueForMissingStub:
+                _i5.Stream<_i3.PopularMoviesState>.empty(),
+          )
+          as _i5.Stream<_i3.PopularMoviesState>);
+
+  @override
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
           as bool);
 
   @override
-  _i7.Future<void> fetchPopularMovies() =>
+  _i5.Future<void> fetchPopularMovies() =>
       (super.noSuchMethod(
             Invocation.method(#fetchPopularMovies, []),
-            returnValue: _i7.Future<void>.value(),
-            returnValueForMissingStub: _i7.Future<void>.value(),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
           )
-          as _i7.Future<void>);
+          as _i5.Future<void>);
 
   @override
-  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#addListener, [listener]),
+  void emit(_i3.PopularMoviesState? state) => super.noSuchMethod(
+    Invocation.method(#emit, [state]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#removeListener, [listener]),
+  void onChange(_i6.Change<_i3.PopularMoviesState>? change) =>
+      super.noSuchMethod(
+        Invocation.method(#onChange, [change]),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void dispose() => super.noSuchMethod(
-    Invocation.method(#dispose, []),
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void notifyListeners() => super.noSuchMethod(
-    Invocation.method(#notifyListeners, []),
-    returnValueForMissingStub: null,
-  );
+  _i5.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 }
