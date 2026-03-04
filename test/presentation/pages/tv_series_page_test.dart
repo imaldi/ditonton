@@ -32,7 +32,7 @@ void main() {
   Widget makeTestableWidget(Widget body) {
     return MultiBlocProvider(providers: [
       BlocProvider<TvSeriesListCubit>.value(value: mockTvSeriesListCubit),
-      BlocProvider<TvSeriesListCubit>.value(value: mockTvSeriesListCubit),
+      BlocProvider<TvSeriesSearchCubit>.value(value: mockTvSeriesSearchCubit),
     ], child: MaterialApp(
       home: body,
       onGenerateRoute: (settings) {
@@ -89,7 +89,7 @@ void main() {
     await tester.tap(find.byIcon(Icons.search));
     await tester.pumpAndSettle();
 
-    expect(find.byType(SearchPage), findsOneWidget);
+    expect(find.byType(SearchPageTvSeries), findsOneWidget);
   });
 
 }
