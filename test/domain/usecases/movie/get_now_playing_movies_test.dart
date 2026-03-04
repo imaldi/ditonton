@@ -1,3 +1,4 @@
+import 'package:ditonton/common/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/movie/get_now_playing_movies.dart';
@@ -10,9 +11,28 @@ void main() {
   late GetNowPlayingMovies usecase;
   late MockMovieRepository mockMovieRepository;
 
+
+  final tMovie = Movie(
+    adult: false,
+    backdropPath: 'backdropPath',
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalTitle: 'originalTitle',
+    overview: 'overview',
+    popularity: 1,
+    posterPath: 'posterPath',
+    releaseDate: 'releaseDate',
+    title: 'title',
+    video: false,
+    voteAverage: 1,
+    voteCount: 1,
+  );
+  final tMovieList = <Movie>[tMovie];
+
   setUp(() {
     mockMovieRepository = MockMovieRepository();
     usecase = GetNowPlayingMovies(mockMovieRepository);
+    provideDummy<Either<Failure, List<Movie>>>(Right(tMovieList));
   });
 
   final tMovies = <Movie>[];

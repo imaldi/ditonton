@@ -1,3 +1,4 @@
+import 'package:ditonton/common/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/usecases/movie/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/tv_series/save_watchlist_tv_series.dart';
@@ -14,6 +15,7 @@ void main() {
   setUp(() {
     mockTvSeriesRepository = MockTvSeriesRepository();
     usecase = SaveWatchlistTvSeries(mockTvSeriesRepository);
+    provideDummy<Either<Failure, String>>(const Right('Success'));
   });
 
   test('should save movie to the repository', () async {

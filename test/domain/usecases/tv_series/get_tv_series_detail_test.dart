@@ -1,3 +1,5 @@
+import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/usecases/tv_series/get_tv_series_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,6 +15,7 @@ void main() {
   setUp(() {
     mockTvSeriesRepository = MockTvSeriesRepository();
     usecase = GetTvSeriesDetail(mockTvSeriesRepository);
+    provideDummy<Either<Failure, TvSeriesDetail>>(Right(testTvSeriesDetail));
   });
 
   final tId = 1;

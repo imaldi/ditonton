@@ -1,3 +1,5 @@
+import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/usecases/movie/get_movie_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,6 +15,7 @@ void main() {
   setUp(() {
     mockMovieRepository = MockMovieRepository();
     usecase = GetMovieDetail(mockMovieRepository);
+    provideDummy<Either<Failure, MovieDetail>>(Right(testMovieDetail));
   });
 
   final tId = 1;

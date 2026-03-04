@@ -1,3 +1,5 @@
+import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/usecases/movie/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/tv_series/get_watchlist_tv_series.dart';
@@ -14,6 +16,7 @@ void main() {
   setUp(() {
     mockTvSeriesRepository = MockTvSeriesRepository();
     usecase = GetWatchlistTvSeries(mockTvSeriesRepository);
+    provideDummy<Either<Failure, List<TvSeries>>>(Right(testTvSeriesList));
   });
 
   test('should get list of tv series from the repository', () async {

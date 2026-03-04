@@ -1,3 +1,4 @@
+import 'package:ditonton/common/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/usecases/movie/remove_watchlist.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,6 +14,8 @@ void main() {
   setUp(() {
     mockMovieRepository = MockMovieRepository();
     usecase = RemoveWatchlist(mockMovieRepository);
+    provideDummy<Either<Failure, String>>(const Right('Success'));
+    // provideDummy<Either<Failure, bool>>(const Right(true));
   });
 
   test('should remove watchlist movie from repository', () async {

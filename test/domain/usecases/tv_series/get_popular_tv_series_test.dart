@@ -1,3 +1,4 @@
+import 'package:ditonton/common/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
@@ -12,12 +13,28 @@ void main() {
   late GetPopularTvSeries usecase;
   late MockTvSeriesRepository mockTvSeriesRpository;
 
+  final tTvSeries = TvSeries(
+    adult: false,
+    backdropPath: 'backdropPath',
+    genreIds: const [1, 2, 3],
+    id: 1,
+    originalName: 'originalName',
+    overview: 'overview',
+    popularity: 1,
+    posterPath: 'posterPath',
+    firstAirDate: 'firstAirDate',
+    name: 'name',
+    voteAverage: 1,
+    voteCount: 1,
+  );
+
+  final tTvSeriesList = <TvSeries>[tTvSeries];
+
   setUp(() {
     mockTvSeriesRpository = MockTvSeriesRepository();
     usecase = GetPopularTvSeries(mockTvSeriesRpository);
+    provideDummy<Either<Failure, List<TvSeries>>>(Right(tTvSeriesList));
   });
-
-  final tTvSeries = <TvSeries>[];
 
   group('GetPopularTvSeries Tests', () {
     group('execute', () {
@@ -26,11 +43,11 @@ void main() {
           () async {
         // arrange
         when(mockTvSeriesRpository.getPopularTvSeries())
-            .thenAnswer((_) async => Right(tTvSeries));
+            .thenAnswer((_) async => Right(tTvSeriesList));
         // act
         final result = await usecase.execute();
         // assert
-        expect(result, Right(tTvSeries));
+        expect(result, Right(tTvSeriesList));
       });
     });
   });
