@@ -1,6 +1,7 @@
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/usecases/movie/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/movie/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/movie/get_watchlist_status.dart';
@@ -20,16 +21,11 @@ import '../../dummy_data/dummy_objects.dart';
 import 'movie_detail_page_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<MovieDetailCubit>()])
-@GenerateMocks([GetMovieDetail, GetMovieRecommendations, GetWatchListStatus, SaveWatchlist, RemoveWatchlist])
 void main() {
-  late MovieDetailCubit cubit;
-  late MockGetMovieDetail mockGetMovieDetail;
-  late MockGetMovieRecommendations mockGetMovieRecommendations;
-  late MockGetWatchListStatus mockGetWatchlistStatus;
-  late MockSaveWatchlist mockSaveWatchlist;
-  late MockRemoveWatchlist mockRemoveWatchlist;
-
   late MockMovieDetailCubit mockMovieDetailCubit;
+
+
+  final tId = 1;
 
   final tMovie = Movie(
     adult: false,
@@ -49,22 +45,9 @@ void main() {
   final tMovies = <Movie>[tMovie];
 
   setUp(() {
-    mockGetMovieDetail = MockGetMovieDetail();
-    mockGetMovieRecommendations = MockGetMovieRecommendations();
-    mockGetWatchlistStatus = MockGetWatchListStatus();
-    mockSaveWatchlist = MockSaveWatchlist();
-    mockRemoveWatchlist = MockRemoveWatchlist();
-
-    cubit = MovieDetailCubit(
-      getMovieDetail: mockGetMovieDetail,
-      getMovieRecommendations: mockGetMovieRecommendations,
-      getWatchListStatus: mockGetWatchlistStatus,
-      saveWatchlist: mockSaveWatchlist,
-      removeWatchlist: mockRemoveWatchlist,
-    );
-
     mockMovieDetailCubit = MockMovieDetailCubit();
-    // provideDummy<Either<Failure, MovieDetail>>(Right(testMovieDetail));
+    provideDummy<Either<Failure, MovieDetail>>(Right(testMovieDetail));
+    provideDummy<Either<Failure, List<Movie>>>(Right(tMovies));
     provideDummy<Either<Failure, String>>(const Right('Added To Wa'));
   });
 
@@ -121,51 +104,61 @@ void main() {
   //       watchlistMessage: MovieDetailCubit.watchlistAddSuccessMessage,
   //     ),
   //   );
-  //
-  //   whenListen(
-  //     mockMovieDetailCubit,
-  //     Stream.fromIterable([
-  //       MovieDetailState(movieState: RequestState.Loading, message: ''),
-  //       MovieDetailState(
-  //         movieState: RequestState.Loaded,
-  //         movie: testMovieDetail,
-  //         recommendationState: RequestState.Empty,
-  //         recommendations: [],
-  //         message: '',
-  //         isAddedToWatchlist: false,
-  //         watchlistMessage: '',
-  //       ),
-  //       MovieDetailState(
-  //         movieState: RequestState.Loaded,
-  //         movie: testMovieDetail,
-  //         recommendationState: RequestState.Loaded,
-  //         recommendations: tMovies,
-  //       ),
-  //     ]),
-  //
-  //   );
   //   //
-  //   // expect(
-  //   //   mockMovieDetailCubit.state,
-  //   //   equals(
+  //   // whenListen(
+  //   //   mockMovieDetailCubit,
+  //   //   Stream.fromIterable([
+  //   //     MovieDetailState(movieState: RequestState.Loading, message: ''),
+  //   //     MovieDetailState(
+  //   //       movieState: RequestState.Loaded,
+  //   //       movie: testMovieDetail,
+  //   //       recommendationState: RequestState.Empty,
+  //   //       recommendations: [],
+  //   //       message: '',
+  //   //       isAddedToWatchlist: false,
+  //   //       watchlistMessage: '',
+  //   //     ),
   //   //     MovieDetailState(
   //   //       movieState: RequestState.Loaded,
   //   //       movie: testMovieDetail,
   //   //       recommendationState: RequestState.Loaded,
   //   //       recommendations: tMovies,
   //   //     ),
-  //   //   ),
+  //   //   ]),
+  //   //
   //   // );
+  //   // //
+  //   // // expect(
+  //   // //   mockMovieDetailCubit.state,
+  //   // //   equals(
+  //   // //     MovieDetailState(
+  //   // //       movieState: RequestState.Loaded,
+  //   // //       movie: testMovieDetail,
+  //   // //       recommendationState: RequestState.Loaded,
+  //   // //       recommendations: tMovies,
+  //   // //     ),
+  //   // //   ),
+  //   // // );
   //
-  //   await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+  //   // await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+  //   //
+  //   // // cubit.addWatchlist(testMovieDetail);
+  //   // await tester.tap(find.byType(ElevatedButton));
+  //   // await tester.pump();
+  //   // expect(find.byType(SnackBar), findsOneWidget);
+  //   // expect(find.text(MovieDetailCubit.watchlistAddSuccessMessage), findsOneWidget);
   //
-  //   // cubit.addWatchlist(testMovieDetail);
+  //   /// cb2
+  //   await tester.runAsync(() async {
+  //     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: tId)));
   //
-  //   await tester.tap(find.byType(ElevatedButton));
-  //   await tester.pump();
+  //     await tester.tap(find.byType(ElevatedButton));
   //
-  //   expect(find.byType(SnackBar), findsOneWidget);
-  //   expect(find.text(MovieDetailCubit.watchlistAddSuccessMessage), findsOneWidget);
+  //     // Simulate the delay to allow the connection check to complete
+  //     await tester.pumpAndSettle();
+  //     expect(find.byType(SnackBar), findsOneWidget);
+  //
+  //   });
   // });
 
   /// still failing, kesalahan berfikir
