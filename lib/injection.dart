@@ -231,7 +231,7 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerSingletonAsync(() async => await sslIoClientHelper());
+  locator.registerSingletonAsync<http.Client>(() async => await sslIoClientHelper());
 }
 
 /// SSL Pinning

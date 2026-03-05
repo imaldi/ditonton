@@ -20,7 +20,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   static const API_KEY = 'api_key=3f95026baf2b6e1a0e740b18f2326232';
   static const BASE_URL = 'https://api.themoviedb.org/3';
 
-  final IOClient client;
+  final http.Client client;
 
   TvSeriesRemoteDataSourceImpl({required this.client});
 
