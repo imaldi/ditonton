@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/bloc/movie/movie_detail_cubit.dart';
@@ -40,11 +42,13 @@ import 'package:ditonton/presentation/provider/tv_series/watchlist_tv_series_not
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
-void main() {
+void main() async {
   di.init();
+  await di.locator.allReady();
   runApp(MyApp());
 }
 
