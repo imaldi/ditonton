@@ -47,7 +47,7 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
 void main() async {
-  di.init();
+  await di.init();
   await di.locator.allReady();
   runApp(MyApp());
 }

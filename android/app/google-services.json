@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "299038856875",
+    "project_id": "ditonton-aldi",
+    "storage_bucket": "ditonton-aldi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299038856875:android:3e0dc35eba4d4bf9f589ee",
+        "android_client_info": {
+          "package_name": "com.dicoding.ditonton"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY4qSFtInsGbrH9kofv5p13yQwCNkJLno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
