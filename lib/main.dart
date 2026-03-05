@@ -39,6 +39,7 @@ import 'package:ditonton/presentation/provider/tv_series/tv_series_detail_notifi
 import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/tv_series_search_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,6 +54,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+  FirebaseAnalyticsObserver(analytics: analytics);
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
